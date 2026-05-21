@@ -702,6 +702,14 @@ function renderOperator() {
 }
 
 showScreen('welcome');
+
+// 전체화면 자동 실행
+document.addEventListener('click', function fullscreenOnce() {
+  if(!document.fullscreenElement) {
+    document.documentElement.requestFullscreen && document.documentElement.requestFullscreen();
+  }
+  document.removeEventListener('click', fullscreenOnce);
+}, {once: true});
 </script>
 </body>
 </html>
