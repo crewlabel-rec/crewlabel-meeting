@@ -136,17 +136,27 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 .check-item{background:var(--bg3);border:1px solid var(--border);border-left:2px solid rgba(196,138,90,0.7);border-radius:0 8px 8px 0;padding:12px 16px;font-size:13px;color:rgba(243,243,241,0.9);line-height:1.6}
 
 /* EXPLORE */
-.risk-explore{display:flex;flex-direction:column;gap:12px}
-.explore-card{background:var(--bg3);border:1px solid rgba(196,122,122,0.2);border-radius:var(--radius-sm);overflow:hidden}
-.explore-q{padding:14px 16px;font-size:13px;color:var(--text);line-height:1.65;border-bottom:1px solid var(--border);font-weight:400}
-.explore-q-label{font-size:9px;letter-spacing:0.2em;color:var(--risk-high);text-transform:uppercase;margin-bottom:6px}
-.explore-answers{padding:10px 16px 14px;display:flex;flex-direction:column;gap:8px}
-.explore-ans{display:flex;gap:10px;align-items:flex-start}
-.explore-ans-text{font-size:12px;color:rgba(243,243,241,0.88);line-height:1.6;flex:1}
-.explore-verdict{font-size:11px;padding:3px 8px;border-radius:4px;flex-shrink:0;margin-top:1px}
-.verdict-ok{background:rgba(106,159,122,0.12);color:var(--risk-low)}
-.verdict-mid{background:rgba(196,162,90,0.12);color:var(--risk-mid)}
-.verdict-bad{background:rgba(196,122,122,0.12);color:var(--risk-high)}
+.risk-explore{display:flex;flex-direction:column;gap:24px}
+.explore-category{border-radius:var(--radius);overflow:hidden;border:1px solid rgba(255,255,255,0.08)}
+.explore-category-header{padding:16px 20px;background:rgba(196,122,122,0.1);border-bottom:1px solid rgba(196,122,122,0.15);display:flex;align-items:center;justify-content:space-between}
+.explore-category-title{font-size:14px;font-weight:600;color:#e8a8a8;letter-spacing:0.05em}
+.explore-category-score{font-size:11px;padding:3px 10px;border-radius:12px;font-weight:500}
+.explore-category-body{background:var(--bg3);display:flex;flex-direction:column}
+.explore-card{border-bottom:1px solid rgba(255,255,255,0.05)}
+.explore-card:last-child{border-bottom:none}
+.explore-q{padding:16px 20px 10px;font-size:14px;color:var(--text);line-height:1.65;font-weight:500}
+.explore-q-num{display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.15em;color:#e8a8a8;background:rgba(196,122,122,0.15);padding:2px 8px;border-radius:4px;margin-bottom:8px;text-transform:uppercase}
+.explore-answers{padding:4px 20px 16px;display:flex;flex-direction:column;gap:6px}
+.explore-ans{display:flex;gap:12px;align-items:center;padding:10px 14px;border-radius:8px;border:1px solid transparent;cursor:pointer;transition:all var(--tr);-webkit-tap-highlight-color:transparent}
+.explore-ans:hover{background:rgba(255,255,255,0.04)}
+.explore-ans.selected-ok{background:rgba(106,159,122,0.15);border-color:rgba(106,159,122,0.4)}
+.explore-ans.selected-mid{background:rgba(196,162,90,0.15);border-color:rgba(196,162,90,0.4)}
+.explore-ans.selected-bad{background:rgba(196,122,122,0.15);border-color:rgba(196,122,122,0.4)}
+.explore-ans-text{font-size:13px;color:rgba(243,243,241,0.85);line-height:1.5;flex:1}
+.explore-verdict{font-size:11px;padding:4px 10px;border-radius:6px;flex-shrink:0;font-weight:500;white-space:nowrap}
+.verdict-ok{background:rgba(106,159,122,0.15);color:#7ec49a}
+.verdict-mid{background:rgba(196,162,90,0.15);color:#d4b06a}
+.verdict-bad{background:rgba(196,122,122,0.15);color:#e89090}
 
 /* REC LIST */
 .rec-list{display:flex;flex-direction:column;gap:8px}
@@ -252,7 +262,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 <div id="op-trigger"></div>
 
 <script>
-var SHEETS_URL = 'https://script.google.com/macros/s/AKfycbz9EHwfRJVBwgh3u5mhUFWC8ozPuLcvIEjVaz_B_8_zlAEw2F-QJy1waZXr2MA1uHyl/exec';
+var SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwtOy8AL8P0h6ZLW68NRPsw7RhuG3biRX85tKskmg8yDvoW6EZY1qXHJ6-6GnZorqc8/exec';
 
 var Q = [
   {id:1,text:"살면서 가끔은 사람들이 나를 오해하는 순간이 있을 수 있어요. 보통 어떻게 오해하고 왜 그런 오해가 생겼을까요?",intent:"자기객관화 여부 / 타인 해석 방향 / 관계 민감도 / 피해의식 가능성",answers:[
@@ -328,21 +338,21 @@ var Q = [
 ];
 
 var EXPLORE = {
-  "피해의식":{title:"피해의식 탐색",questions:[
+  "피해의식":{title:"피해의식 탐색",key:"피해의식",questions:[
     {q:"혹시 지금까지 팀 활동이나 그룹 모임 같은 거 해보신 적 있어요? 어떠셨어요?",answers:[
       {text:"재밌었어요, 사람들이랑 잘 맞았어요",verdict:"ok",label:"긍정 신호"},
       {text:"중간에 힘들었는데 그래도 잘 마무리했어요",verdict:"mid",label:"중립"},
-      {text:"사람들이 좀 이상했어요 / 저만 열심히 했어요",verdict:"bad",label:"피해의식 가능성 높음 → 다음 질문으로"},
+      {text:"사람들이 좀 이상했어요 / 저만 열심히 했어요",verdict:"bad",label:"피해의식 가능성 높음"},
       {text:"별로 안 좋았어요, 다신 안 하려고 했어요",verdict:"bad",label:"피해의식 + 관계 단절형"}
     ]},
     {q:"(부정 답변 시) 그때 제일 힘들었던 게 어떤 부분이었어요?",answers:[
       {text:"소통이 잘 안 됐어요",verdict:"mid",label:"중립 — 소통 방식 탐색"},
       {text:"내가 너무 맞춰줬는데 아무도 몰라줬어요",verdict:"bad",label:"피해의식 확정 — 리스크 높음"},
       {text:"제 잘못도 있었던 것 같아요",verdict:"ok",label:"자기객관화 가능 — 리스크 낮아짐"},
-      {text:"사람들이 절 싫어했던 것 같아요",verdict:"bad",label:"피해의식 + 관계 과해석 — 매우 높은 리스크"}
+      {text:"사람들이 절 싫어했던 것 같아요",verdict:"bad",label:"피해의식 + 과해석 — 매우 높은 리스크"}
     ]}
   ]},
-  "감정누적":{title:"감정 누적 / 회피 탐색",questions:[
+  "감정누적":{title:"감정 누적 / 회피 탐색",key:"감정누적",questions:[
     {q:"사람이랑 지내다가 서운한 게 쌓이면 보통 어떻게 해소하는 편이에요?",answers:[
       {text:"시간 지나면 자연스럽게 풀려요",verdict:"mid",label:"중립 — 회피 성향 있지만 관리 가능"},
       {text:"혼자 생각 정리하고 나면 괜찮아져요",verdict:"mid",label:"중립 — 내향형 처리 방식"},
@@ -356,7 +366,7 @@ var EXPLORE = {
       {text:"자주 있는 편이에요",verdict:"bad",label:"높은 리스크 — 팀 배치 재고 필요"}
     ]}
   ]},
-  "과해석":{title:"과해석 / 외부반응 의존 탐색",questions:[
+  "과해석":{title:"과해석 / 외부반응 의존 탐색",key:"과해석",questions:[
     {q:"누군가 나한테 별 의미 없이 한 말이 계속 생각났던 경험 있어요?",answers:[
       {text:"별로 없는 것 같아요",verdict:"ok",label:"긍정 신호 — 과해석 가능성 낮음"},
       {text:"가끔 있긴 한데 금방 잊어요",verdict:"mid",label:"중립 — 수용 가능"},
@@ -369,27 +379,45 @@ var EXPLORE = {
       {text:"솔직히 많이 신경 쓸 것 같아요",verdict:"bad",label:"악플 내성 낮음 확정 — 리스크 높음"}
     ]}
   ]},
-  "악플민감":{title:"악플 내성 탐색",questions:[
+  "악플민감":{title:"악플 내성 탐색",key:"악플민감",questions:[
     {q:"온라인에서 누군가한테 안 좋은 말 들어본 적 있어요? 그때 어떻게 하셨어요?",answers:[
       {text:"별로 신경 안 썼어요",verdict:"ok",label:"긍정 신호 — 내성 높음"},
       {text:"기분은 나빴지만 금방 잊었어요",verdict:"ok",label:"긍정 신호 — 회복력 있음"},
       {text:"좀 오래 기억에 남더라고요",verdict:"mid",label:"중립 — 추가 탐색 필요"},
-      {text:"많이 속상했고 한동안 생각났어요",verdict:"bad",label:"악플 내성 낮음 — 방송 시작 전 충분한 대화 필요"}
+      {text:"많이 속상했고 한동안 생각났어요",verdict:"bad",label:"악플 내성 낮음 — 방송 전 충분한 대화 필요"}
+    ]},
+    {q:"(부정 답변 시) 그런 말을 들었을 때 주변에 이야기하거나 털어낼 수 있었어요?",answers:[
+      {text:"주변에 이야기하거나 다른 걸 하면서 털어냈어요",verdict:"ok",label:"긍정 신호 — 감정 처리 능력 있음"},
+      {text:"혼자 생각하다 보면 어느 순간 괜찮아졌어요",verdict:"mid",label:"중립 — 내향형 처리 방식"},
+      {text:"혼자 계속 생각하게 되더라고요. 잘 안 잊혀졌어요",verdict:"bad",label:"악플 내성 낮음 확정 — 방송 초반 집중 관리 필요"},
+      {text:"그때 이후로 그런 상황을 피하게 된 것 같아요",verdict:"bad",label:"회피형 + 내성 낮음 — 리스크 높음"}
     ]}
   ]},
-  "단절형":{title:"관계 단절 성향 탐색",questions:[
+  "단절형":{title:"관계 단절 성향 탐색",key:"단절형",questions:[
     {q:"한번 멀어진 사람이랑 다시 가까워진 경험이 있어요?",answers:[
       {text:"네, 시간 지나면 자연스럽게 다시 편해졌어요",verdict:"ok",label:"긍정 신호 — 관계 회복 가능"},
       {text:"한두 번 있었는데 쉽진 않았어요",verdict:"mid",label:"중립 — 수용 가능"},
-      {text:"거의 없는 것 같아요. 한번 멀어지면 그냥 멀어지는 편이에요",verdict:"bad",label:"단절형 확정 — 장기 팀 운영 리스크 높음"}
+      {text:"거의 없는 것 같아요. 한번 멀어지면 그냥 멀어지는 편이에요",verdict:"bad",label:"단절형 확정 — 다음 질문으로"}
+    ]},
+    {q:"(단절 답변 시) 상대방이랑 맞지 않아서인지, 다시 가까워지는 게 어색해서인지 어떤 쪽에 가까운 것 같아요?",answers:[
+      {text:"맞지 않는 사람이랑 억지로 가까워질 필요는 없다고 생각해요",verdict:"mid",label:"선택적 관계형 — 팀 내 갈등 시 탐색 필요"},
+      {text:"다시 먼저 다가가는 게 어색하고 힘들어요",verdict:"bad",label:"관계 회복 어려움 — 팀 내 갈등 관리 필요"},
+      {text:"한번 틀어지면 그 사람에 대한 감정이 잘 안 바뀌는 것 같아요",verdict:"bad",label:"단절형 확정 — 장기 팀 운영 리스크 높음"},
+      {text:"솔직히 귀찮기도 하고 어차피 다 비슷하다고 느낀 것 같아요",verdict:"bad",label:"관계 냉소형 — 매우 높은 리스크"}
     ]}
   ]},
-  "인정욕구":{title:"인정욕구 / 외부반응 의존 탐색",questions:[
+  "인정욕구":{title:"인정욕구 / 외부반응 의존 탐색",key:"인정욕구",questions:[
     {q:"사람들 반응이 좋을 때랑 안 좋을 때 본인 기분 차이가 많이 나는 편이에요?",answers:[
       {text:"별로 차이 없는 것 같아요",verdict:"ok",label:"긍정 신호 — 내적 동기 강함"},
       {text:"좋으면 기분 좋긴 한데 크게 달라지진 않아요",verdict:"mid",label:"중립 — 수용 가능"},
       {text:"반응이 좋으면 훨씬 더 잘 하게 되는 것 같아요",verdict:"mid",label:"외부 동기 의존 — 추가 탐색"},
-      {text:"많이 나는 편이에요. 반응이 없으면 좀 위축되는 것 같아요",verdict:"bad",label:"외부반응 의존 확정 — 초반 관리 필요"}
+      {text:"많이 나는 편이에요. 반응이 없으면 좀 위축되는 것 같아요",verdict:"bad",label:"외부반응 의존 확정 — 다음 질문으로"}
+    ]},
+    {q:"(의존 답변 시) 반응이 없거나 조용할 때 '내가 잘못하고 있는 건가' 하는 생각이 드는 편이에요?",answers:[
+      {text:"별로 그런 생각은 안 드는 것 같아요",verdict:"ok",label:"긍정 신호 — 내적 기준 있음"},
+      {text:"가끔 그런 생각이 들긴 하는데 금방 넘겨요",verdict:"mid",label:"중립 — 수용 가능"},
+      {text:"반응이 없으면 뭔가 잘못된 것 같아서 불안해지는 편이에요",verdict:"bad",label:"외부반응 의존 확정 — 초반 피드백 관리 중요"},
+      {text:"반응이 없으면 하기 싫어지거나 의욕이 떨어지는 것 같아요",verdict:"bad",label:"외부반응 의존 + 지속성 리스크 — 높은 리스크"}
     ]}
   ]}
 };
@@ -400,6 +428,14 @@ var answers = new Array(10).fill(null);
 var shuffledOrders = [];
 var applicantInfo = {name:'',age:'',gender:'',job:'',contact:''};
 var selectedGender = '';
+var exploreSelections = {
+  '피해의식':[null,null],
+  '감정누적':[null,null],
+  '과해석':[null,null],
+  '악플민감':[null,null],
+  '단절형':[null,null],
+  '인정욕구':[null,null]
+};
 
 function selectGender(g) {
   selectedGender = g;
@@ -541,25 +577,49 @@ function saveToSheets() {
   var btn = document.getElementById('save-btn');
   if(!btn) return;
   var sc = calcScores();
+
+  function getExploreLabel(type, qi) {
+    var sel = exploreSelections[type] && exploreSelections[type][qi];
+    return sel || '';
+  }
+
   var payload = {
     name:applicantInfo.name||'',age:applicantInfo.age||'',gender:applicantInfo.gender||'',
     job:applicantInfo.job||'',contact:applicantInfo.contact||'',
     q01:answers[0]||'',q02:answers[1]||'',q03:answers[2]||'',q04:answers[3]||'',q05:answers[4]||'',
     q06:answers[5]||'',q07:answers[6]||'',q08:answers[7]||'',q09:answers[8]||'',q10:answers[9]||'',
-    attack:sc.posPct.attack,defense:sc.posPct.defense,control:sc.posPct.control,observe:sc.posPct.observe,risk:sc.riskPct
+    attack:sc.posPct.attack,defense:sc.posPct.defense,control:sc.posPct.control,observe:sc.posPct.observe,risk:sc.riskPct,
+    피해의식_Q1:getExploreLabel('피해의식',0),
+    피해의식_Q2:getExploreLabel('피해의식',1),
+    감정누적_Q1:getExploreLabel('감정누적',0),
+    감정누적_Q2:getExploreLabel('감정누적',1),
+    과해석_Q1:getExploreLabel('과해석',0),
+    과해석_Q2:getExploreLabel('과해석',1),
+    악플내성_Q1:getExploreLabel('악플민감',0),
+    악플내성_Q2:getExploreLabel('악플민감',1),
+    단절형_Q1:getExploreLabel('단절형',0),
+    단절형_Q2:getExploreLabel('단절형',1),
+    인정욕구_Q1:getExploreLabel('인정욕구',0),
+    인정욕구_Q2:getExploreLabel('인정욕구',1)
   };
   btn.textContent = '저장 중...';
   btn.classList.add('saving');
   fetch(SHEETS_URL, {
-    method:'POST', mode:'no-cors',
-    headers:{'Content-Type':'application/json'},
+    method:'POST',
+    headers:{'Content-Type':'text/plain'},
     body:JSON.stringify(payload)
-  }).then(function(){
-    btn.textContent = '✓ 저장 완료';
-    btn.classList.remove('saving');
-    btn.classList.add('saved');
+  }).then(function(res){ return res.json(); })
+  .then(function(result){
+    if(result && result.result === 'success'){
+      btn.textContent = '✓ 저장 완료';
+      btn.classList.remove('saving');
+      btn.classList.add('saved');
+    } else {
+      btn.textContent = '⚠ 저장 실패 — 다시 시도';
+      btn.classList.remove('saving');
+    }
   }).catch(function(){
-    btn.textContent = '저장 실패 — 다시 시도';
+    btn.textContent = '⚠ 저장 실패 — 다시 시도';
     btn.classList.remove('saving');
   });
 }
@@ -647,34 +707,77 @@ function renderOperator() {
   checkSec.appendChild(checkList);
   inner.appendChild(checkSec);
 
-  // explore
-  if(sc.riskPct>=30 && sc.exploreTypes.length>0){
-    div(inner);
-    addSectionTitle(inner,'추가 탐색 질문');
-    var exploreSec = el('div','op-section');
-    var exploreWrap = el('div','risk-explore');
-    sc.exploreTypes.forEach(function(type){
-      var data = EXPLORE[type];
-      if(!data) return;
-      data.questions.forEach(function(q){
-        var card = el('div','explore-card');
-        var qDiv = el('div','explore-q');
-        qDiv.innerHTML = '<div class="explore-q-label">'+data.title+'</div>'+q.q;
-        card.appendChild(qDiv);
-        var ansWrap = el('div','explore-answers');
-        q.answers.forEach(function(a){
-          var row = el('div','explore-ans');
-          var vClass = a.verdict==='ok'?'verdict-ok':a.verdict==='mid'?'verdict-mid':'verdict-bad';
-          row.innerHTML = '<div class="explore-ans-text">"'+a.text+'"</div><div class="explore-verdict '+vClass+'">'+a.label+'</div>';
-          ansWrap.appendChild(row);
-        });
-        card.appendChild(ansWrap);
-        exploreWrap.appendChild(card);
+  // explore — 모든 유형 항상 표시, 카테고리별 묶음, 토글 선택
+  div(inner);
+  addSectionTitle(inner,'추가 탐색 질문');
+  var exploreSec = el('div','op-section');
+  var exploreWrap = el('div','risk-explore');
+
+  var allTypes = ['피해의식','감정누적','과해석','악플민감','단절형','인정욕구'];
+  allTypes.forEach(function(type){
+    var data = EXPLORE[type];
+    if(!data) return;
+    var catScore = sc.riskTypes[type] || 0;
+
+    var category = el('div','explore-category');
+
+    // 헤더
+    var catHeader = el('div','explore-category-header');
+    var catTitle = el('div','explore-category-title');
+    catTitle.textContent = data.title;
+    var catBadge = el('div','explore-category-score '+(catScore>=20?'verdict-bad':catScore>=10?'verdict-mid':'verdict-ok'));
+    catBadge.textContent = catScore > 0 ? '탐색 필요' : '해당 없음';
+    catHeader.appendChild(catTitle);
+    catHeader.appendChild(catBadge);
+    category.appendChild(catHeader);
+
+    // 질문들
+    var catBody = el('div','explore-category-body');
+    data.questions.forEach(function(q, qi){
+      var card = el('div','explore-card');
+
+      var qDiv = el('div','explore-q');
+      var qNum = el('div','explore-q-num');
+      qNum.textContent = 'Q' + (qi+1);
+      qDiv.appendChild(qNum);
+      qDiv.appendChild(document.createTextNode(q.q));
+      card.appendChild(qDiv);
+
+      var ansWrap = el('div','explore-answers');
+      q.answers.forEach(function(a){
+        var row = el('div','explore-ans');
+        var vClass = a.verdict==='ok'?'verdict-ok':a.verdict==='mid'?'verdict-mid':'verdict-bad';
+        row.innerHTML = '<div class="explore-ans-text">'+a.text+'</div><div class="explore-verdict '+vClass+'">'+a.label+'</div>';
+
+        // 토글 선택
+        (function(rowEl, typeKey, qIdx, ansLabel, ansVerdict){
+          rowEl.addEventListener('click', function(){
+            ansWrap.querySelectorAll('.explore-ans').forEach(function(r){
+              r.classList.remove('selected-ok','selected-mid','selected-bad');
+            });
+            if(exploreSelections[typeKey][qIdx] === ansLabel) {
+              exploreSelections[typeKey][qIdx] = null;
+            } else {
+              rowEl.classList.add('selected-'+ansVerdict);
+              exploreSelections[typeKey][qIdx] = ansLabel;
+            }
+          });
+          if(exploreSelections[typeKey][qIdx] === ansLabel) {
+            rowEl.classList.add('selected-'+ansVerdict);
+          }
+        })(row, type, qi, a.label, a.verdict);
+
+        ansWrap.appendChild(row);
       });
+      card.appendChild(ansWrap);
+      catBody.appendChild(card);
     });
-    exploreSec.appendChild(exploreWrap);
-    inner.appendChild(exploreSec);
-  }
+    category.appendChild(catBody);
+    exploreWrap.appendChild(category);
+  });
+
+  exploreSec.appendChild(exploreWrap);
+  inner.appendChild(exploreSec);
 
   div(inner);
 
