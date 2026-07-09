@@ -34,7 +34,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 
 /* INFO */
 #info{justify-content:flex-start;padding:0;overflow:hidden}
-.info-wrap{width:100%;height:100%;overflow-y:auto;padding:60px 48px 60px;display:flex;flex-direction:column;align-items:center}
+.info-wrap{width:100%;height:100%;overflow-y:auto;padding:96px 48px 60px;display:flex;flex-direction:column;align-items:center}
 .info-logo{font-family:var(--font-o);font-size:13px;font-weight:500;letter-spacing:0.3em;color:var(--text-dim);margin-bottom:48px;text-transform:uppercase}
 .info-title{font-size:26px;font-weight:300;color:var(--text);margin-bottom:12px;text-align:center}
 .info-sub{font-size:15px;font-weight:300;color:var(--text-muted);line-height:1.8;text-align:center;margin-bottom:44px}
@@ -47,9 +47,13 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 .gender-btns{display:flex;gap:12px}
 .gender-btn{flex:1;background:var(--bg3);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius-sm);padding:16px;font-family:var(--font-u);font-size:16px;font-weight:400;color:var(--text-muted);cursor:pointer;transition:background var(--tr),border-color var(--tr),color var(--tr);-webkit-tap-highlight-color:transparent}
 .gender-btn.selected{background:var(--card-selected);border-color:var(--border-sel);color:var(--text)}
-.info-next-btn{width:100%;max-width:580px;background:none;border:1px solid rgba(122,146,165,0.35);border-radius:var(--radius-sm);color:var(--accent);font-family:var(--font-u);font-size:16px;font-weight:400;padding:18px;cursor:pointer;letter-spacing:0.04em;transition:background var(--tr),opacity var(--tr);-webkit-tap-highlight-color:transparent}
-.info-next-btn:hover{background:rgba(122,146,165,0.08)}
-.info-next-btn:active{opacity:0.7}
+.info-next-btn{width:100%;max-width:580px;background:none;border:1px solid rgba(255,255,255,0.15);border-radius:var(--radius-sm);color:rgba(243,243,241,0.3);font-family:var(--font-u);font-size:16px;font-weight:400;padding:18px;cursor:not-allowed;letter-spacing:0.04em;transition:background var(--tr),opacity var(--tr),color var(--tr),border-color var(--tr)}
+.info-next-btn.ready{border-color:rgba(126,196,154,0.5);color:#7ec49a;cursor:pointer;background:rgba(126,196,154,0.08)}
+.info-next-btn.ready:hover{background:rgba(126,196,154,0.16)}
+.info-next-btn.ready:active{opacity:0.7}
+.info-hint-sticky{position:fixed;top:0;left:0;right:0;width:100%;text-align:center;font-size:13px;font-weight:500;color:rgba(243,243,241,0.45);background:rgba(28,28,30,0.97);backdrop-filter:blur(8px);padding:14px 20px;z-index:200;transition:color var(--tr),background var(--tr);border-bottom:1px solid rgba(255,255,255,0.06);display:none}
+.info-hint-sticky.active{display:block}
+.info-hint-sticky.ready{color:#7ec49a}
 
 /* QUESTION */
 #question{justify-content:center;padding:48px;overflow-y:auto}
@@ -64,10 +68,10 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:22px 26px;font-size:17px;font-weight:400;line-height:1.4;color:rgba(243,243,241,0.92);cursor:pointer;transition:background var(--tr),border-color var(--tr),color var(--tr);-webkit-tap-highlight-color:transparent;user-select:none;white-space:nowrap;overflow:hidden;text-overflow:clip}
 .card:hover{background:var(--card-hover)}
 .card.selected{background:var(--card-selected);border-color:var(--border-sel);color:var(--text)}
-.next-btn{width:100%;max-width:980px;background:none;border:1px solid rgba(122,146,165,0.3);border-radius:var(--radius-sm);color:var(--accent);font-family:var(--font-u);font-size:16px;font-weight:400;padding:18px;cursor:pointer;transition:background var(--tr),opacity var(--tr);letter-spacing:0.04em;margin-bottom:40px;-webkit-tap-highlight-color:transparent;opacity:0;pointer-events:none}
-.next-btn.visible{opacity:1;pointer-events:all}
-.next-btn:hover{background:rgba(122,146,165,0.08)}
-.next-btn:active{opacity:0.7}
+.next-btn{width:100%;max-width:980px;background:none;border:1px solid rgba(255,255,255,0.15);border-radius:var(--radius-sm);color:rgba(243,243,241,0.3);font-family:var(--font-u);font-size:16px;font-weight:400;padding:18px;cursor:not-allowed;transition:background var(--tr),opacity var(--tr),color var(--tr),border-color var(--tr);letter-spacing:0.04em;margin-bottom:40px;-webkit-tap-highlight-color:transparent}
+.next-btn.ready{border-color:rgba(126,196,154,0.5);color:#7ec49a;cursor:pointer;background:rgba(126,196,154,0.08)}
+.next-btn.ready:hover{background:rgba(126,196,154,0.16)}
+.next-btn.ready:active{opacity:0.7}
 
 /* COMPLETION */
 #completion .check-mark{width:64px;height:64px;border:1px solid rgba(122,146,165,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:48px;color:var(--accent);font-size:26px}
@@ -193,11 +197,12 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
   <div class="logo">Crew Label</div>
   <div class="headline">당신이 가장 빛나는 자리를<br>찾기 위한 질문입니다.</div>
   <div class="sub">이 설문지는 크루레이블 팀 구성에서<br>본인의 성향과 포지션을 파악하기 위한 것으로,<br>더 좋은 팀워크와 더 사랑받는 방송을<br>만들기 위한 과정입니다.<br><br>정답은 없습니다.<br>지금의 본인과 가장 가까운 답을 편하게 골라주세요.</div>
-  <button class="start-btn" onclick="showScreen('info')">시작하기 <span>→</span></button>
+  <button class="start-btn" onclick="showScreen('info'); document.getElementById('info-hint-sticky').classList.add('active');">시작하기 <span>→</span></button>
 </div>
 
 <!-- INFO -->
 <div id="info" class="screen">
+  <div class="info-hint-sticky" id="info-hint-sticky">아직 입력이 완료되지 않았어요</div>
   <div class="info-wrap">
     <div class="info-logo">Crew Label</div>
     <div class="info-title">기본 정보를 입력해 주세요</div>
@@ -205,11 +210,11 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
     <div class="info-fields">
       <div class="info-field">
         <label class="info-label">이름</label>
-        <input class="info-input" id="f-name" type="text" placeholder="이름">
+        <input class="info-input" id="f-name" type="text" placeholder="이름 (한글 3~4자)" maxlength="4">
       </div>
       <div class="info-field">
         <label class="info-label">나이</label>
-        <input class="info-input" id="f-age" type="number" placeholder="예) 28">
+        <input class="info-input" id="f-age" type="text" inputmode="numeric" placeholder="예) 28" maxlength="2">
       </div>
       <div class="info-field">
         <label class="info-label">성별</label>
@@ -224,10 +229,10 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
       </div>
       <div class="info-field">
         <label class="info-label">연락처</label>
-        <input class="info-input" id="f-contact" type="tel" placeholder="010-0000-0000">
+        <input class="info-input" id="f-contact" type="tel" inputmode="numeric" placeholder="010-0000-0000" maxlength="13">
       </div>
     </div>
-    <button class="info-next-btn" onclick="submitInfo()">다음으로 →</button>
+    <button class="info-next-btn" id="info-next-btn" onclick="submitInfo()">다음으로 →</button>
   </div>
 </div>
 
@@ -441,16 +446,114 @@ function selectGender(g) {
   selectedGender = g;
   document.getElementById('g-male').classList.toggle('selected', g==='남성');
   document.getElementById('g-female').classList.toggle('selected', g==='여성');
+  checkInfoValid();
 }
 
+function isValidName(name) {
+  // 한글만, 3~4자
+  return /^[가-힣]{3,4}$/.test(name);
+}
+function isValidAge(age) {
+  var n = parseInt(age, 10);
+  return /^[0-9]{2}$/.test(age) && n >= 20 && n <= 69;
+}
+function isValidContact(contact) {
+  var digits = contact.replace(/[^0-9]/g,'');
+  return digits.length === 10 || digits.length === 11;
+}
+function formatContact(digits) {
+  if(digits.length <= 3) return digits;
+  if(digits.length <= 7) return digits.slice(0,3)+'-'+digits.slice(3);
+  return digits.slice(0,3)+'-'+digits.slice(3,7)+'-'+digits.slice(7,11);
+}
+
+function checkInfoValid() {
+  var name = document.getElementById('f-name').value;
+  var age = document.getElementById('f-age').value;
+  var contact = document.getElementById('f-contact').value;
+  var job = document.getElementById('f-job').value.trim();
+
+  var nameOk = isValidName(name);
+  var ageOk = isValidAge(age);
+  var contactOk = isValidContact(contact);
+  var genderOk = !!selectedGender;
+  var jobOk = job.length > 0;
+
+  var allOk = nameOk && ageOk && contactOk && genderOk && jobOk;
+
+  var btn = document.getElementById('info-next-btn');
+  var hint = document.getElementById('info-hint-sticky');
+
+  if(allOk) {
+    btn.classList.add('ready');
+    hint.classList.add('ready');
+    hint.textContent = '입력이 완료됐어요. 다음으로 진행해 주세요 :)';
+  } else {
+    btn.classList.remove('ready');
+    hint.classList.remove('ready');
+    var missing = [];
+    if(!nameOk) missing.push('이름(한글 3~4자)');
+    if(!ageOk) missing.push('나이(20~69세)');
+    if(!genderOk) missing.push('성별');
+    if(!jobOk) missing.push('직업/활동 분야');
+    if(!contactOk) missing.push('연락처');
+    hint.textContent = missing.length ? missing.join(' · ') + ' 확인이 필요해요' : '아직 입력이 완료되지 않았어요';
+  }
+  return allOk;
+}
+
+// 이름 입력 — 한글 조합 중에는 필터링 보류, 조합 완료 시에만 필터
+var nameComposing = false;
+var nameInput = document.getElementById('f-name');
+nameInput.addEventListener('compositionstart', function(){ nameComposing = true; });
+nameInput.addEventListener('compositionend', function(e){
+  nameComposing = false;
+  var v = e.target.value.replace(/[^가-힣]/g, '');
+  if(v.length > 4) v = v.slice(0,4);
+  e.target.value = v;
+  checkInfoValid();
+});
+nameInput.addEventListener('input', function(e){
+  if(nameComposing) return; // 조합 중에는 건드리지 않음
+  var v = e.target.value.replace(/[^가-힣]/g, '');
+  if(v.length > 4) v = v.slice(0,4);
+  e.target.value = v;
+  checkInfoValid();
+});
+
+// 나이 입력 — 숫자만, 2자리까지
+document.getElementById('f-age').addEventListener('input', function(e){
+  var v = e.target.value.replace(/[^0-9]/g, '');
+  if(v.length > 2) v = v.slice(0,2);
+  e.target.value = v;
+  checkInfoValid();
+});
+
+// 연락처 입력 — 숫자만 추출 후 자동 하이픈
+document.getElementById('f-contact').addEventListener('input', function(e){
+  var digits = e.target.value.replace(/[^0-9]/g, '');
+  if(digits.length > 11) digits = digits.slice(0,11);
+  e.target.value = formatContact(digits);
+  checkInfoValid();
+});
+
+document.getElementById('f-job').addEventListener('input', checkInfoValid);
+
+// 키보드가 올라올 때 입력란이 가려지지 않도록 포커스 시 스크롤
+['f-name','f-age','f-job','f-contact'].forEach(function(id){
+  document.getElementById(id).addEventListener('focus', function(e){
+    setTimeout(function(){
+      e.target.scrollIntoView({block:'center', behavior:'smooth'});
+    }, 300);
+  });
+});
+
 function submitInfo() {
+  if(!checkInfoValid()) return;
   var name = document.getElementById('f-name').value.trim();
   var age = document.getElementById('f-age').value.trim();
   var job = document.getElementById('f-job').value.trim();
   var contact = document.getElementById('f-contact').value.trim();
-  if(!name){ alert('이름을 입력해 주세요.'); return; }
-  if(!age){ alert('나이를 입력해 주세요.'); return; }
-  if(!selectedGender){ alert('성별을 선택해 주세요.'); return; }
   applicantInfo = {name:name, age:age, gender:selectedGender, job:job, contact:contact};
   startQuestions();
 }
@@ -498,11 +601,11 @@ function renderQ() {
       container.querySelectorAll('.card').forEach(function(c){ c.classList.remove('selected'); });
       card.classList.add('selected');
       answers[currentQ] = ans.code;
-      document.getElementById('next-btn').classList.add('visible');
+      document.getElementById('next-btn').classList.add('ready');
     });
     container.appendChild(card);
   });
-  document.getElementById('next-btn').classList.toggle('visible', answers[currentQ]!==null);
+  document.getElementById('next-btn').classList.toggle('ready', answers[currentQ]!==null);
   document.getElementById('question').scrollTop = 0;
 }
 
