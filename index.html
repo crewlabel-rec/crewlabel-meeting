@@ -443,6 +443,7 @@ var exploreSelections = {
 };
 
 function selectGender(g) {
+  if(!hasStartedInput) hasStartedInput = true;
   selectedGender = g;
   document.getElementById('g-male').classList.toggle('selected', g==='남성');
   document.getElementById('g-female').classList.toggle('selected', g==='여성');
@@ -467,6 +468,8 @@ function formatContact(digits) {
   return digits.slice(0,3)+'-'+digits.slice(3,7)+'-'+digits.slice(7,11);
 }
 
+var hasStartedInput = false;
+
 function checkInfoValid() {
   var name = document.getElementById('f-name').value;
   var age = document.getElementById('f-age').value;
@@ -484,7 +487,10 @@ function checkInfoValid() {
   var btn = document.getElementById('info-next-btn');
   var hint = document.getElementById('info-hint-sticky');
 
-  if(allOk) {
+  if(!hasStartedInput) {
+    hint.classList.remove('ready');
+    hint.textContent = 'START';
+  } else if(allOk) {
     btn.classList.add('ready');
     hint.classList.add('ready');
     hint.textContent = '입력이 완료됐어요. 다음으로 진행해 주세요 :)';
@@ -539,9 +545,13 @@ document.getElementById('f-contact').addEventListener('input', function(e){
 
 document.getElementById('f-job').addEventListener('input', checkInfoValid);
 
-// 키보드가 올라올 때 입력란이 가려지지 않도록 포커스 시 스크롤
+// 키보드가 올라올 때 입력란이 가려지지 않도록 포커스 시 스크롤 + 입력 시작 트리거
 ['f-name','f-age','f-job','f-contact'].forEach(function(id){
   document.getElementById(id).addEventListener('focus', function(e){
+    if(!hasStartedInput) {
+      hasStartedInput = true;
+      checkInfoValid();
+    }
     setTimeout(function(){
       e.target.scrollIntoView({block:'center', behavior:'smooth'});
     }, 300);
