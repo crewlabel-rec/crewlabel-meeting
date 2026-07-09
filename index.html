@@ -152,12 +152,12 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 .explore-q{padding:16px 20px 10px;font-size:16px;color:var(--text);line-height:1.65;font-weight:500}
 .explore-q-num{display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.15em;color:#e8a8a8;background:rgba(196,122,122,0.15);padding:2px 8px;border-radius:4px;margin-bottom:8px;text-transform:uppercase}
 .explore-answers{padding:4px 20px 16px;display:flex;flex-direction:column;gap:6px}
-.explore-ans{display:flex;gap:12px;align-items:center;padding:10px 14px;border-radius:8px;border:1px solid transparent;cursor:pointer;transition:all var(--tr);-webkit-tap-highlight-color:transparent}
+.explore-ans{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;padding:10px 14px;border-radius:8px;border:1px solid transparent;cursor:pointer;transition:all var(--tr);-webkit-tap-highlight-color:transparent}
 .explore-ans:hover{background:rgba(255,255,255,0.04)}
 .explore-ans.selected-ok{background:rgba(106,159,122,0.15);border-color:rgba(106,159,122,0.4)}
 .explore-ans.selected-mid{background:rgba(196,162,90,0.15);border-color:rgba(196,162,90,0.4)}
 .explore-ans.selected-bad{background:rgba(196,122,122,0.15);border-color:rgba(196,122,122,0.4)}
-.explore-ans-text{font-size:15px;color:rgba(243,243,241,0.85);line-height:1.5;flex:1}
+.explore-ans-text{font-size:15px;color:rgba(243,243,241,0.85);line-height:1.5;flex:0 1 auto}
 .explore-verdict{font-size:12px;padding:4px 10px;border-radius:6px;flex-shrink:0;font-weight:500;white-space:nowrap}
 .verdict-ok{background:rgba(106,159,122,0.15);color:#7ec49a}
 .verdict-mid{background:rgba(196,162,90,0.15);color:#d4b06a}
@@ -725,7 +725,17 @@ function saveToSheets() {
   html2canvas(captureTarget, {
     backgroundColor: '#1C1C1E',
     scale: 1.5,
-    useCORS: true
+    useCORS: true,
+    height: captureTarget.scrollHeight,
+    windowHeight: captureTarget.scrollHeight,
+    onclone: function(clonedDoc){
+      var clonedEl = clonedDoc.getElementById('op-inner');
+      if(clonedEl){
+        clonedEl.style.height = 'auto';
+        clonedEl.style.overflow = 'visible';
+        clonedEl.scrollTop = 0;
+      }
+    }
   }).then(function(canvas){
     var dataUrl = canvas.toDataURL('image/png');
     payload.opImageBase64 = dataUrl.split(',')[1];
