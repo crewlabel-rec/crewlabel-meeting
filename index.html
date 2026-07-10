@@ -29,11 +29,10 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 /* WELCOME */
 #welcome .logo-img{width:320px;height:auto;display:block;margin-bottom:36px;filter:drop-shadow(0 0 3px rgba(255,255,255,0.35))}
 #welcome .headline{font-size:25px;font-weight:300;line-height:1.45;text-align:center;color:var(--text);max-width:620px;margin-bottom:24px}
-.tdat-highlight{color:#E3C9A8}
-#welcome .key-message{font-size:18px;font-weight:500;line-height:1.8;text-align:center;color:#F5C542;max-width:520px;margin-bottom:56px}
-#welcome .sub{font-size:17px;font-weight:300;line-height:1.8;text-align:center;color:var(--text-muted);max-width:520px;margin-bottom:28px}
-#welcome .start-btn{background:#F5C542;border:none;color:#1C1C1E;font-family:var(--font-u);font-size:17px;font-weight:600;letter-spacing:0.05em;cursor:pointer;display:flex;align-items:center;gap:10px;padding:16px 42px;border-radius:var(--radius-sm);transition:opacity var(--tr);-webkit-tap-highlight-color:transparent;animation:startPulse 1.8s ease-in-out infinite}
-@keyframes startPulse{0%,100%{box-shadow:0 0 0 0 rgba(245,197,66,0.5)}50%{box-shadow:0 0 0 12px rgba(245,197,66,0)}}
+#welcome .key-message{font-size:17px;font-weight:300;line-height:1.8;text-align:center;color:var(--text);max-width:520px;margin-bottom:56px}
+.key-highlight{color:#c48a5a;text-shadow:0 0 10px rgba(196,138,90,0.75),0 0 22px rgba(196,138,90,0.45)}
+#welcome .sub{font-size:17px;font-weight:300;line-height:1.8;text-align:center;color:var(--text);max-width:520px;margin-bottom:28px}
+#welcome .start-btn{background:none;border:1px solid #c48a5a;color:#c48a5a;font-family:var(--font-u);font-size:16px;font-weight:500;letter-spacing:0.05em;cursor:pointer;display:flex;align-items:center;gap:10px;padding:14px 36px;border-radius:var(--radius-sm);transition:opacity var(--tr);-webkit-tap-highlight-color:transparent;box-shadow:0 0 0 4px rgba(196,138,90,0.12)}
 #welcome .start-btn:active{opacity:0.6}
 
 /* INFO */
@@ -199,9 +198,9 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 <!-- WELCOME -->
 <div id="welcome" class="screen active">
   <img class="logo-img" id="welcome-logo-img" src="https://crewlabel-rec.github.io/images/crew%20label%20logo%20white%20text.png" alt="Crew Label 크루레이블">
-  <div class="headline">이 설문은 크루레이블이 자체 개발한<br>TDAT(Talk Disposition Analysis Tool)<br><span class="tdat-highlight">'토크성향분석 툴'</span> 입니다.</div>
+  <div class="headline">이 설문은 크루레이블이 자체 개발한<br>TDAT(Talk Disposition Analysis Tool)<br><span style="font-weight:600">'토크성향분석 툴'</span> 입니다.</div>
   <div class="sub">이 설문지는 크루레이블 팀 구성에서<br>당신이 가장 빛나는 자리를 찾기 위해<br>토크성향과 포지션 역량을 발굴합니다.</div>
-  <div class="key-message">정답은 없습니다.<br>지금의 본인과 가장 가까운 답을 선택하셔야<br>가장 나다운 포지션으로 팀에 합류하게 됩니다.</div>
+  <div class="key-message">정답은 없습니다.<br><span class="key-highlight">지금의 본인과 가장 가까운 답을 선택</span>하셔야<br>가장 나다운 포지션으로 팀에 합류하게 됩니다.</div>
   <button class="start-btn" onclick="showScreen('info'); document.getElementById('info-hint-sticky').classList.add('active');">시작하기 <span>→</span></button>
 </div>
 
