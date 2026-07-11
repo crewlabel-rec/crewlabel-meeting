@@ -75,6 +75,17 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 .next-btn.ready{border-color:rgba(126,196,154,0.5);color:#7ec49a;cursor:pointer;background:rgba(126,196,154,0.08)}
 .next-btn.ready:hover{background:rgba(126,196,154,0.16)}
 .next-btn.ready:active{opacity:0.7}
+.t-title{font-size:24px;font-weight:600;color:var(--text);line-height:1.5;margin-bottom:14px;text-align:center;max-width:560px}
+.t-body{font-size:16px;color:var(--text-muted);line-height:1.85;max-width:480px;margin-bottom:44px;text-align:center}
+.t-highlight{color:var(--text);font-weight:500}
+.t-btn{background:none;border:1px solid var(--accent2);color:var(--accent2);font-family:var(--font-u);font-size:16px;font-weight:500;letter-spacing:0.05em;cursor:pointer;padding:14px 40px;border-radius:var(--radius-sm);box-shadow:0 0 0 4px rgba(196,138,90,0.12);-webkit-tap-highlight-color:transparent}
+.subj-top{width:100%;max-width:900px;display:flex;justify-content:space-between;align-items:center;margin-bottom:36px;flex-shrink:0}
+.subj-num{font-family:var(--font-o);font-size:15px;font-weight:500;letter-spacing:0.25em;color:var(--text-dim);text-transform:uppercase}
+.subj-count{font-family:var(--font-o);font-size:15px;color:var(--text-dim)}
+.subj-text{width:100%;max-width:900px;font-size:22px;font-weight:300;line-height:1.7;color:var(--text);margin-bottom:28px;flex-shrink:0}
+.subj-input{width:100%;max-width:900px;min-height:220px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px 24px;font-family:var(--font-u);font-size:17px;color:rgba(243,243,241,0.92);line-height:1.6;resize:vertical;margin-bottom:28px;-webkit-tap-highlight-color:transparent}
+.subj-input:focus{outline:none;border-color:rgba(196,138,90,0.5)}
+.subj-input::placeholder{color:var(--text-dim)}
 
 /* COMPLETION */
 #completion .check-mark{width:64px;height:64px;border:1px solid rgba(122,146,165,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:48px;color:var(--accent);font-size:26px}
@@ -192,6 +203,13 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 .op-save-btn:active{opacity:0.7}
 .op-save-btn.saving{opacity:0.5;pointer-events:none}
 .op-save-btn.saved{background:rgba(106,159,122,0.15);border-color:rgba(106,159,122,0.4);color:var(--risk-low);pointer-events:none}
+.subj-review{margin-bottom:18px}
+.subj-review-q{font-size:13px;color:var(--text-dim);margin-bottom:5px;font-style:italic;line-height:1.5}
+.subj-review-a{font-size:14px;color:rgba(243,243,241,0.9);line-height:1.65;background:var(--bg3);border-radius:8px;padding:12px 16px;margin-bottom:8px;white-space:pre-wrap}
+.subj-memo-label{font-size:11px;color:var(--accent);margin-bottom:4px;letter-spacing:0.05em;font-weight:600}
+.subj-memo-input{width:100%;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-family:var(--font-u);font-size:13px;color:rgba(243,243,241,0.85);line-height:1.5;resize:vertical;min-height:60px;-webkit-tap-highlight-color:transparent}
+.subj-memo-input:focus{outline:none;border-color:rgba(122,146,165,0.5)}
+.subj-memo-input::placeholder{color:var(--text-dim)}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .fade-up{animation:fadeUp 0.45s ease both}
@@ -256,6 +274,24 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
   <div class="q-text" id="q-text"></div>
   <div class="cards" id="cards-container"></div>
   <button class="next-btn" id="next-btn" onclick="nextQuestion()">다음으로</button>
+</div>
+
+<!-- TRANSITION -->
+<div id="transition" class="screen">
+  <div class="t-title">객관식 질문을 모두 완료하셨습니다.<br>이제 주관식 질문 3개만 더<br>답해주시면 완료됩니다.</div>
+  <div class="t-body">저희 제작진은 신청 당시 작성해주신 <span class="t-highlight">'신청서'</span>와, 지금 진행 중인 이 <span class="t-highlight">'설문'</span> 두 가지만으로 회원님과 함께할 팀원을 매칭하고, 회원님만의 캐릭터 포지셔닝을 제안하게 됩니다.<br><br>그만큼 이어지는 주관식 답변이 중요합니다. 최대한 편하게, 그리고 최대한 자세히 적어주시면, 제작진 회의를 거쳐 회원님이 가장 빛날 수 있는 팀을 찾아드리겠습니다.</div>
+  <button class="t-btn" onclick="startSubjective()">다음으로 →</button>
+</div>
+
+<!-- SUBJECTIVE -->
+<div id="subjective" class="screen">
+  <div class="subj-top">
+    <span class="subj-num" id="subj-num-label">주관식 01</span>
+    <span class="subj-count" id="subj-count-label">1 / 3</span>
+  </div>
+  <div class="subj-text" id="subj-text"></div>
+  <textarea class="subj-input" id="subj-input" placeholder="편하게 적어주세요"></textarea>
+  <button class="next-btn" id="subj-next-btn" onclick="nextSubjective()">다음으로</button>
 </div>
 
 <!-- COMPLETION -->
@@ -700,8 +736,54 @@ function renderQ() {
 function nextQuestion() {
   if(answers[currentQ]===null) return;
   currentQ++;
-  if(currentQ>=20){ showScreen('completion'); return; }
+  if(currentQ>=20){ showScreen('transition'); return; }
   renderQ();
+}
+
+// ── 주관식 (Q21~23) ──
+var SUBJ = [
+  {id:21, text:"최근에 사람들이 웃었거나 재밌어했던 순간이 있었다면, 그때 상황을 간단히 얘기해주세요."},
+  {id:22, text:"크루레이블에서 방송을 시작하게 된다면, 가장 기대되는 점과 가장 걱정되는 점을 각각 솔직히 적어주세요."},
+  {id:23, text:"크루레이블에서 본인은 어떤 캐릭터로 성장하길 희망하시나요?"}
+];
+var subjectiveAnswers = ['', '', ''];
+var operatorMemos = ['', '', ''];
+var currentSubj = 0;
+
+function startSubjective() {
+  currentSubj = 0;
+  renderSubjective();
+  showScreen('subjective');
+}
+
+function renderSubjective() {
+  var s = SUBJ[currentSubj];
+  document.getElementById('subj-num-label').textContent = '주관식 ' + String(currentSubj+1).padStart(2,'0');
+  document.getElementById('subj-count-label').textContent = (currentSubj+1) + ' / 3';
+  var textEl = document.getElementById('subj-text');
+  textEl.style.animation='none'; textEl.offsetHeight;
+  textEl.textContent = s.text;
+  textEl.style.animation='fadeUp 0.4s ease both';
+  var input = document.getElementById('subj-input');
+  input.value = subjectiveAnswers[currentSubj] || '';
+  var btn = document.getElementById('subj-next-btn');
+  btn.textContent = (currentSubj===2) ? '완료하기' : '다음으로';
+  btn.classList.toggle('ready', input.value.trim().length>0);
+  document.getElementById('subjective').scrollTop = 0;
+}
+
+document.getElementById('subj-input').addEventListener('input', function(e){
+  subjectiveAnswers[currentSubj] = e.target.value;
+  document.getElementById('subj-next-btn').classList.toggle('ready', e.target.value.trim().length>0);
+});
+
+function nextSubjective() {
+  var val = document.getElementById('subj-input').value;
+  if(val.trim().length===0) return;
+  subjectiveAnswers[currentSubj] = val;
+  currentSubj++;
+  if(currentSubj>=3){ showScreen('completion'); return; }
+  renderSubjective();
 }
 
 // OPERATOR TRIGGER — 5회 연속 탭
@@ -854,6 +936,8 @@ function saveToSheets() {
     chemistryBuilding:sc.axisScores.chemistryBuilding,recoverySpeed:sc.axisScores.recoverySpeed,
     feedbackReceptivity:sc.axisScores.feedbackReceptivity,
     priorityTags:sc.priorityTags.join(' / '),crossoverTags:sc.crossoverTags.join(' / '),
+    q21:subjectiveAnswers[0]||'',q22:subjectiveAnswers[1]||'',q23:subjectiveAnswers[2]||'',
+    opMemo1:operatorMemos[0]||'',opMemo2:operatorMemos[1]||'',opMemo3:operatorMemos[2]||'',
     피해의식_Q1:getExploreLabel('피해의식',0),
     피해의식_Q2:getExploreLabel('피해의식',1),
     감정누적_Q1:getExploreLabel('감정누적',0),
@@ -999,7 +1083,7 @@ function renderOperator() {
   div(inner);
 
   // traits
-  addSectionTitle(inner,'관계 · 방송 성향','포지션%을 바탕으로 자동 분류된 종합 태그입니다. 공격·수비·컨트롤형은 30% 이상, 관찰형은 25% 이상일 때 표시되며, A·B 응답이 14개 이상이면 "전반적 적응력 높음" 태그가 추가됩니다. 아무 태그도 없으면 "유동형"으로 표시됩니다.');
+  addSectionTitle(inner,'관계 · 방송 성향','포지션%을 바탕으로 자동 분류된 종합 태그입니다. 공격·수비·컨트롤형은 30% 이상, 관찰형은 25% 이상일 때 해당 유형 태그가 뜨고, 여러 질문에서 적극적이고 확신에 찬 답변을 자주 골랐다면 "전반적 적응력 높음" 태그가 함께 붙습니다. 특별히 두드러진 유형이 없으면 "유동형"으로 표시되니, 이 경우엔 대화로 직접 성향을 파악해주세요. (\'유동형\'은 어느 한 유형도 뚜렷하게 두드러지지 않고, 여러 유형에 점수가 고르게 나뉘어 있다는 뜻입니다.)');
   var traitSec = el('div','op-section');
   var traitWrap = el('div','trait-tags');
   sc.traits.forEach(function(t){
@@ -1169,6 +1253,31 @@ function renderOperator() {
   });
   detailSec.appendChild(detailList);
   inner.appendChild(detailSec);
+  div(inner);
+
+  // 주관식 답변 & 운영자 메모
+  addSectionTitle(inner,'주관식 답변 & 운영자 메모','신청자가 직접 작성한 주관식 답변입니다. 점수화되지 않는 정성적 자료이며, 옆 메모칸에 직접 소견을 남길 수 있습니다.');
+  var subjSec = el('div','op-section');
+  SUBJ.forEach(function(s, idx){
+    var block = el('div','subj-review');
+    var qEl = el('div','subj-review-q');
+    qEl.textContent = 'Q'+(21+idx)+'. '+s.text;
+    var aEl = el('div','subj-review-a');
+    aEl.textContent = subjectiveAnswers[idx] || '(미응답)';
+    var memoLabel = el('div','subj-memo-label');
+    memoLabel.textContent = '운영자 메모';
+    var memoInput = document.createElement('textarea');
+    memoInput.className = 'subj-memo-input';
+    memoInput.placeholder = '이 답변에 대한 소견을 남겨보세요';
+    memoInput.value = operatorMemos[idx] || '';
+    memoInput.addEventListener('input', function(e){ operatorMemos[idx] = e.target.value; });
+    block.appendChild(qEl);
+    block.appendChild(aEl);
+    block.appendChild(memoLabel);
+    block.appendChild(memoInput);
+    subjSec.appendChild(block);
+  });
+  inner.appendChild(subjSec);
   div(inner);
 
   // buttons
