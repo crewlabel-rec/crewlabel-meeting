@@ -109,7 +109,10 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 
 /* OP SECTIONS */
 .op-section{margin-bottom:28px}
-.op-section-title{font-size:11px;font-weight:600;letter-spacing:0.25em;color:var(--text-dim);text-transform:uppercase;margin-bottom:14px}
+.op-section-title{font-size:11px;font-weight:600;letter-spacing:0.25em;color:var(--text-dim);text-transform:uppercase}
+.op-section-title-wrap{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.help-icon{font-size:15px;color:var(--accent);cursor:pointer;line-height:1;user-select:none;-webkit-tap-highlight-color:transparent;flex-shrink:0}
+.help-tip{background:rgba(122,146,165,0.1);border:1px solid rgba(122,146,165,0.3);border-radius:8px;padding:12px 16px;font-size:13px;line-height:1.6;color:rgba(243,243,241,0.85);margin:-6px 0 16px;font-weight:400;letter-spacing:normal;text-transform:none}
 
 /* POS BARS */
 .pos-bars{display:flex;flex-direction:column;gap:10px}
@@ -147,7 +150,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 .explore-category{border-radius:var(--radius);overflow:hidden;border:1px solid rgba(255,255,255,0.08)}
 .explore-category-header{padding:16px 20px;background:rgba(196,122,122,0.1);border-bottom:1px solid rgba(196,122,122,0.15);display:flex;align-items:center;justify-content:space-between}
 .explore-category-title{font-size:16px;font-weight:600;color:#e8a8a8;letter-spacing:0.05em}
-.explore-category-score{font-size:11px;padding:3px 10px;border-radius:12px;font-weight:500}
+.explore-category-score{font-size:13px;padding:5px 14px;border-radius:12px;font-weight:700;border:1px solid transparent;letter-spacing:0.02em}
 .explore-category-body{background:var(--bg3);display:flex;flex-direction:column}
 .explore-card{border-bottom:1px solid rgba(255,255,255,0.05)}
 .explore-card:last-child{border-bottom:none}
@@ -160,10 +163,10 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 .explore-ans.selected-mid{background:rgba(196,162,90,0.15);border-color:rgba(196,162,90,0.4)}
 .explore-ans.selected-bad{background:rgba(196,122,122,0.15);border-color:rgba(196,122,122,0.4)}
 .explore-ans-text{font-size:15px;color:rgba(243,243,241,0.85);line-height:1.5;flex:0 1 auto}
-.explore-verdict{font-size:12px;padding:4px 10px;border-radius:6px;flex-shrink:0;font-weight:500;white-space:nowrap}
-.verdict-ok{background:rgba(106,159,122,0.15);color:#7ec49a}
-.verdict-mid{background:rgba(196,162,90,0.15);color:#d4b06a}
-.verdict-bad{background:rgba(196,122,122,0.15);color:#e89090}
+.explore-verdict{font-size:12px;padding:4px 10px;border-radius:6px;flex-shrink:0;font-weight:600;white-space:nowrap;border:1px solid transparent}
+.verdict-ok{background:rgba(106,159,122,0.22);color:#7ec49a;border-color:rgba(106,159,122,0.5)}
+.verdict-mid{background:rgba(196,162,90,0.22);color:#d4b06a;border-color:rgba(196,162,90,0.5)}
+.verdict-bad{background:rgba(196,122,122,0.22);color:#e89090;border-color:rgba(196,122,122,0.5)}
 
 /* REC LIST */
 .rec-list{display:flex;flex-direction:column;gap:8px}
@@ -175,6 +178,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 .q-detail-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
 .q-detail-num{font-size:11px;color:var(--text-dim);letter-spacing:0.15em}
 .q-detail-sel{font-size:13px;font-weight:600;padding:2px 8px;border-radius:4px}
+.q-detail-question{font-size:13px;color:rgba(243,243,241,0.55);line-height:1.5;margin-bottom:6px;font-style:italic}
 .q-detail-text{font-size:14px;color:rgba(243,243,241,0.88);line-height:1.6;margin-bottom:5px}
 .q-detail-intent{font-size:13px;color:rgba(243,243,241,0.6);line-height:1.5}
 
@@ -245,7 +249,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
   <div class="q-top">
     <div class="q-meta">
       <span class="q-num" id="q-num-label">Question 01</span>
-      <span class="q-count" id="q-count-label">1 / 10</span>
+      <span class="q-count" id="q-count-label">1 / 20</span>
     </div>
     <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
   </div>
@@ -343,6 +347,76 @@ var Q = [
     {code:"C",text:"원래 사람 이야기나 관계 중심 콘텐츠를 좋아하는 편이에요",trait:"콘텐츠 적응형",pos:{attack:1,defense:2,control:1,observe:2},risk:0},
     {code:"D",text:"지금까지와는 조금 다른 흐름이나 변화가 필요하다고 느꼈어요",trait:"현실 돌파형",pos:{attack:2,defense:1,control:2,observe:1},risk:0},
     {code:"E",text:"저를 좀 더 알아봐주는 사람들이 많아지면 좋겠다는 마음도 있었어요. 그런 기회가 될 수 있을 것 같았고요",trait:"외부반응 의존 / 인정욕구 탐색",pos:{attack:1,defense:1,control:1,observe:3},risk:10,riskType:"인정욕구"}
+  ]},
+  {id:11,text:"팀원이 예상 못한 (웃긴) 드립을 쳤을 때, 본인의 리액션은 보통 어떤 경우가 많을 것 같나요?",intent:"리액션 진정성 탐색 — 공/수/컨/관 겸업 신호 포함",answers:[
+    {code:"A",text:"말이 끝나기도 전에 저도 모르게 한 술 더 떠서, 오히려 제가 그 드립을 더 크게 키워버리고 싶은 욕심이 생겨요",pos:{attack:4,defense:0,control:0,observe:0},axis:"reactionAuthenticity",axisScore:8,priorityTag:"공격형 확정",priorityScore:15},
+    {code:"B",text:"리액션이 큰 경우가 많아서, 오히려 그 드립이 저 때문에 한 번 더 회자되는 편이에요",pos:{attack:0,defense:4,control:0,observe:0},axis:"reactionAuthenticity",axisScore:14,priorityTag:"수비형 확정 — 하이텐션",priorityScore:15},
+    {code:"C",text:"웃으면서 자연스럽게 다음 이야기로 넘기는 편인데, 정말 웃길 때는 다음 이야기가 생각나지 않아요",pos:{attack:0,defense:1,control:3,observe:0},axis:"reactionAuthenticity",axisScore:9,crossoverTag:"수비 겸업(컨트롤형)",crossoverScore:8},
+    {code:"D",text:"평소에 왠만하면 리액션이 없는 편인데, 정말 재미있고 코드가 맞는 개그였다면 리액션이 많아지기도 해요",pos:{attack:0,defense:1,control:0,observe:3},axis:"reactionAuthenticity",axisScore:13,crossoverTag:"수비 겸업(관찰형)",crossoverScore:8},
+    {code:"E",text:"진짜 웃기면 저도 그냥 자연스럽게 웃는 편이고, 애매하게 웃긴 건 가볍게 웃고 마는 편이에요",pos:{attack:1,defense:1,control:1,observe:1},axis:"reactionAuthenticity",axisScore:4}
+  ]},
+  {id:12,text:"방송 중에 놀림을 받거나 살짝 민망해질 때, 사실 그 순간의 리액션이 시청자에게는 오히려 매력 포인트가 되는 경우가 많은데요. 그럴 때 본인의 리액션은 보통 어떤 형태로 나오나요?",intent:"리액션 진정성 탐색 — 공/수/컨/관 겸업 신호 포함",answers:[
+    {code:"A",text:"민망할수록 그 상황을 되받아쳐서, 저를 놀린 사람을 역으로 몰아붙이고 싶어지는 편이에요",pos:{attack:4,defense:0,control:0,observe:0},axis:"reactionAuthenticity",axisScore:9,priorityTag:"공격형 확정",priorityScore:15},
+    {code:"B",text:"민망함이 표정이나 리액션에 그대로 다 드러나는 경우가 많은데, 오히려 그 반응을 좋아하는 경우도 있더라고요",pos:{attack:0,defense:4,control:0,observe:0},axis:"reactionAuthenticity",axisScore:15,priorityTag:"수비형 확정 — 하이텐션",priorityScore:15},
+    {code:"C",text:"그 놀림이 저도 인정되는 거라면 \"그래 나 그런 거 맞아\"라며 그냥 인정해줘요. 하지만 제대로 놀림받았을 땐 리액션이 크게 나올 때가 있어요",pos:{attack:0,defense:1,control:3,observe:0},axis:"reactionAuthenticity",axisScore:10,crossoverTag:"수비 겸업(컨트롤형)",crossoverScore:8},
+    {code:"D",text:"평소엔 리액션을 잘 안 드러내는 편인데, 정말 제 약점을 정확히 찌른 놀림이었다면 리액션이 크게 터지기도 해요",pos:{attack:0,defense:1,control:0,observe:3},axis:"reactionAuthenticity",axisScore:13,crossoverTag:"수비 겸업(관찰형)",crossoverScore:8},
+    {code:"E",text:"정곡을 찌르면 순간 흠칫하긴 하는데, 티 안 내려고 하다가 결국 못 참고 웃어버리는 편이에요",pos:{attack:1,defense:1,control:1,observe:1},axis:"reactionAuthenticity",axisScore:5}
+  ]},
+  {id:13,text:"팀 분위기가 완전히 가라앉거나, 누군가 방송 중 크게 당황해서 위축될 것 같은 상황이라면, 본인은 보통 어떻게 반응하나요?",intent:"서포트 지수 탐색 — 공/수 겸업 신호 포함",answers:[
+    {code:"A",text:"제가 먼저 대화를 이끌어 흐름을 바꿔보려는 편이에요. 그러다 저만 이상해질 때도 있지만요",pos:{attack:0,defense:0,control:4,observe:0},axis:"supportIndex",axisScore:12,priorityTag:"컨트롤형 확정",priorityScore:15},
+    {code:"C",text:"저도 모르게 분위기를 반전시켜 텐션을 올리려 노력해볼 것 같지만, 정말 심각한 상황이면 그냥 진지하게 나서기도 해요",pos:{attack:3,defense:0,control:1,observe:0},axis:"supportIndex",axisScore:7,crossoverTag:"컨트롤 겸업",crossoverScore:8},
+    {code:"D",text:"그 사람 반응에 맞춰서 풀어주려고 하는 편이지만, 정말 심각해 보이면 조용히 다가가서 챙기기도 해요",pos:{attack:0,defense:3,control:0,observe:1},axis:"supportIndex",axisScore:11,crossoverTag:"관찰 겸업",crossoverScore:8},
+    {code:"B",text:"당황한 사람한테 말을 걸어서 관심을 분산시켜주는 편이에요. 그러다 제가 다음 타겟이 될 때도 있지만요",pos:{attack:0,defense:0,control:0,observe:4},axis:"supportIndex",axisScore:14,priorityTag:"관찰형 확정",priorityScore:15},
+    {code:"E",text:"정말 심각한 상황이면 저도 같이 챙기려고 하고, 그 정도가 아니면 그냥 지켜보는 편이에요",pos:{attack:1,defense:1,control:1,observe:1},axis:"supportIndex",axisScore:6}
+  ]},
+  {id:14,text:"팀원 중 한 명이 대화에 잘 못 끼거나 살짝 소외된 것 같은 분위기라면, 본인은 보통 어떻게 반응하나요?",intent:"서포트 지수 탐색 — 공/수 겸업 신호 포함",answers:[
+    {code:"A",text:"자연스럽게 그 사람한테 말을 걸 타이밍을 만들어서 대화에 끼워주는 편이에요. 그러다 흐름이 저한테로 쏠려서 부담스러워질 때도 있지만요",pos:{attack:0,defense:0,control:4,observe:0},axis:"supportIndex",axisScore:11,priorityTag:"컨트롤형 확정",priorityScore:15},
+    {code:"E",text:"많이 소외된 것 같으면 저도 같이 신경 써서 끼워주려고 하고, 그 정도가 아니면 자연스럽게 흘러가게 두는 편이에요",pos:{attack:1,defense:1,control:1,observe:1},axis:"supportIndex",axisScore:5},
+    {code:"B",text:"그 사람이 편하게 말할 수 있게 먼저 말수를 줄이고 들어주는 편이에요. 그러다 저까지 같이 묻힐 때도 있지만요",pos:{attack:0,defense:0,control:0,observe:4},axis:"supportIndex",axisScore:15,priorityTag:"관찰형 확정",priorityScore:15},
+    {code:"C",text:"그 사람 얘기에 텐션을 실어서 같이 띄워주려는 편인데, 정말 안 풀리는 분위기면 대화 자체를 다시 짜기도 해요",pos:{attack:3,defense:0,control:1,observe:0},axis:"supportIndex",axisScore:7,crossoverTag:"컨트롤 겸업",crossoverScore:8},
+    {code:"D",text:"눈을 마주치고 표정과 제스처로 그 사람에게 힘을 실어주는 편인데, 정말 안 풀리면 조용히 다음 화제를 준비하기도 해요",pos:{attack:0,defense:3,control:0,observe:1},axis:"supportIndex",axisScore:13,crossoverTag:"관찰 겸업",crossoverScore:8}
+  ]},
+  {id:15,text:"새로운 팀에 합류해서 아직 다들 어색한 상태라면, 본인은 보통 어떤 편인가요?",intent:"케미 형성력 탐색 — 코칭 설계용",answers:[
+    {code:"A",text:"어색한 침묵이 있으면 제가 먼저 말을 걸어서 풀어보려는 편이에요",axis:"chemistryBuilding",axisScore:15},
+    {code:"B",text:"상대가 관심 있어 할 만한 걸 캐치해서 자연스럽게 대화를 이어가려는 편이에요",axis:"chemistryBuilding",axisScore:13},
+    {code:"C",text:"몇 번 보다 보면 자연스럽게 편해지는 편이라, 처음엔 약간 데면데면한 편이에요",axis:"chemistryBuilding",axisScore:9},
+    {code:"D",text:"낯을 좀 가리는 편이라, 상대가 먼저 다가와 주면 그때부터는 편해지는 편이에요",axis:"chemistryBuilding",axisScore:7},
+    {code:"E",text:"저는 관계를 급하게 만들기보다, 천천히 진심으로 쌓아가는 편이라 시간이 좀 걸리는 편이에요",axis:"chemistryBuilding",axisScore:4}
+  ]},
+  {id:16,text:"친해지고 싶은 팀원이 있는데 생각만큼 가까워지지 않는다면, 본인은 보통 어떤 편인가요?",intent:"케미 형성력 탐색 — 코칭 설계용",answers:[
+    {code:"A",text:"그 사람이 좋아할 만한 포인트를 계속 찾아보면서, 다른 방식으로 계속 다가가 보는 편이에요",axis:"chemistryBuilding",axisScore:15},
+    {code:"B",text:"무리하게 다가가기보다, 자연스러운 타이밍이 올 때까지 조금씩 거리를 좁혀가는 편이에요",axis:"chemistryBuilding",axisScore:12},
+    {code:"C",text:"몇 번은 다가가 보는 편인데, 사람마다 합이 있다고 생각해서 잘 맞는 사람과의 케미에 좀 더 집중하는 편이에요",axis:"chemistryBuilding",axisScore:8},
+    {code:"D",text:"제가 다가가기보다는, 그 사람이 편해질 때까지 기다려주는 편이에요",axis:"chemistryBuilding",axisScore:6},
+    {code:"E",text:"저는 관계를 서두르는 편이 아니라서, 시간이 지나면서 자연스럽게 가까워지길 기다리는 편이에요",axis:"chemistryBuilding",axisScore:4}
+  ]},
+  {id:17,text:"방송이 나가고 나서, 예상과 다르게 안 좋은 댓글이나 반응을 보게 되는 순간도 있을 수 있는데요. 그런 걸 봤을 때, 본인은 보통 어떤 편인가요?",intent:"즉석 회복력 탐색 — 코칭 설계용",answers:[
+    {code:"A",text:"그런 반응까지도 재밌는 소재라고 생각해서, 오히려 다음 방송에서 그 얘기를 먼저 꺼내는 편이에요",axis:"recoverySpeed",axisScore:15},
+    {code:"B",text:"신경이 크게 쓰이진 않는 편이라, 금방 잊고 하던 일에 집중하는 편이에요",axis:"recoverySpeed",axisScore:12},
+    {code:"C",text:"잠깐 이런저런 생각이 들긴 하는데, 하루 정도 지나면 자연스럽게 괜찮아지는 편이에요",axis:"recoverySpeed",axisScore:9},
+    {code:"D",text:"저도 사람인지라 며칠은 신경이 쓰이는 편인데, 그래도 다음 방송 준비나 활동에는 지장이 없는 편이에요",axis:"recoverySpeed",axisScore:7},
+    {code:"E",text:"누구나 그런 반응을 보면 마음이 흔들릴 수밖에 없는 것 같아요. 저도 한동안은 마음이 무거운 편인데, 그래도 결국엔 다시 평소 페이스로 돌아오는 편이에요",axis:"recoverySpeed",axisScore:5}
+  ]},
+  {id:18,text:"모임이나 그룹 활동 중에 다른 사람과 비교되면서, 본인이 상대적으로 부족해 보이는 순간이 있을 수 있는데요. 그런 순간이 왔을 때, 본인은 보통 어떤 편인가요?",intent:"즉석 회복력 탐색 — 코칭 설계용",answers:[
+    {code:"A",text:"비교되는 상황 자체를 소재 삼아서, 오히려 그 얘기를 제가 먼저 웃으면서 꺼낼 수 있어요",axis:"recoverySpeed",axisScore:15},
+    {code:"B",text:"크게 신경 쓰이진 않는 편이라, 그 자리에서 바로 평소처럼 자연스럽게 넘어가는 경우도 꽤 있습니다",axis:"recoverySpeed",axisScore:12},
+    {code:"C",text:"잠깐 마음이 쓰이긴 하는데, 몇 초 안에 다시 평소 컨디션으로 돌아오는 편이에요",axis:"recoverySpeed",axisScore:9},
+    {code:"D",text:"그 순간엔 위축되는 편인데, 그래도 티 안 내고 자리를 이어가는 편이에요",axis:"recoverySpeed",axisScore:7},
+    {code:"E",text:"누구나 비교당하면 마음이 흔들릴 수밖에 없는 것 같아요. 저도 그 순간엔 꽤 위축되는 편인데, 시간이 좀 지나면 다시 평소 페이스로 돌아오는 편이에요",axis:"recoverySpeed",axisScore:5}
+  ]},
+  {id:19,text:"팀원이나 스태프가 \"이런 부분은 이렇게 해보면 어떨까?\"라고 직접적인 조언이나 지적을 했을 때, 본인은 보통 어떤 편인가요?",intent:"피드백 수용력 탐색 — 코칭 설계용 (가중치 상향 대상)",answers:[
+    {code:"A",text:"그 자리에서 바로 \"그거 좋다\"며 다음부터 적용해보려고 하는 편이에요",axis:"feedbackReceptivity",axisScore:15},
+    {code:"B",text:"생각해보고 맞으면 인정하고, 납득이 안 되면 이야기를 나눠봐요",axis:"feedbackReceptivity",axisScore:13},
+    {code:"C",text:"처음엔 조금 낯설어도, 곱씹어보면 대체로 수긍하고 받아들이는 편이에요",axis:"feedbackReceptivity",axisScore:9},
+    {code:"D",text:"그 순간엔 살짝 서운한 마음이 드는 편인데, 시간이 지나면 곱씹어보게 되는 편이에요",axis:"feedbackReceptivity",axisScore:6},
+    {code:"E",text:"지적을 받으면 순간적으로 마음이 좀 불편해지는 게 사실이에요. 그래도 결국엔 왜 그런 말을 했는지 이해하려고 하는 편이에요",axis:"feedbackReceptivity",axisScore:4}
+  ]},
+  {id:20,text:"같은 지적을 두 번, 세 번 반복해서 듣게 된다면, 본인은 보통 어떤 편인가요?",intent:"피드백 수용력 탐색 — 코칭 설계용 (가중치 상향 대상)",answers:[
+    {code:"A",text:"제가 못 고친 거니까, 그 부분을 확실히 바꾸려고 더 신경 쓰는 편이에요",axis:"feedbackReceptivity",axisScore:15},
+    {code:"B",text:"같은 말을 여러 번 듣는다는 건 진짜 문제라는 뜻이라 생각해서, 이번엔 제대로 바꿔보려고 하는 편이에요",axis:"feedbackReceptivity",axisScore:13},
+    {code:"C",text:"매번 고치려고는 하는데, 막상 방송 중엔 다시 예전 습관이 나올 때가 있는 편이에요",axis:"feedbackReceptivity",axisScore:8},
+    {code:"D",text:"반복해서 듣다 보면 조금 위축되는 편인데, 그래도 계속 신경은 쓰려고 하는 편이에요",axis:"feedbackReceptivity",axisScore:6},
+    {code:"E",text:"같은 지적을 반복해서 들으면 솔직히 마음이 편하진 않아요. 그래도 결국엔 제가 바꿔야 할 부분이라는 건 인정하는 편이에요",axis:"feedbackReceptivity",axisScore:4}
   ]}
 ];
 
@@ -433,7 +507,7 @@ var EXPLORE = {
 
 // STATE
 var currentQ = 0;
-var answers = new Array(10).fill(null);
+var answers = new Array(20).fill(null);
 var shuffledOrders = [];
 var applicantInfo = {name:'',age:'',gender:'',job:'',contact:''};
 var selectedGender = '';
@@ -596,8 +670,8 @@ function renderQ() {
   var q = Q[currentQ];
   var shuffled = shuffledOrders[currentQ];
   document.getElementById('q-num-label').textContent = 'Question ' + String(currentQ+1).padStart(2,'0');
-  document.getElementById('q-count-label').textContent = (currentQ+1) + ' / 10';
-  document.getElementById('progress-fill').style.width = (currentQ/10*100) + '%';
+  document.getElementById('q-count-label').textContent = (currentQ+1) + ' / 20';
+  document.getElementById('progress-fill').style.width = (currentQ/20*100) + '%';
   var qEl = document.getElementById('q-text');
   qEl.style.animation='none'; qEl.offsetHeight;
   qEl.textContent = q.text;
@@ -626,7 +700,7 @@ function renderQ() {
 function nextQuestion() {
   if(answers[currentQ]===null) return;
   currentQ++;
-  if(currentQ>=10){ showScreen('completion'); return; }
+  if(currentQ>=20){ showScreen('completion'); return; }
   renderQ();
 }
 
@@ -652,16 +726,23 @@ function calcScores() {
   var pos = {attack:0,defense:0,control:0,observe:0};
   var riskRaw = 0;
   var riskTypes = {};
+  var axisScores = {reactionAuthenticity:0,supportIndex:0,chemistryBuilding:0,recoverySpeed:0,feedbackReceptivity:0};
+  var priorityTags = [];
+  var crossoverTags = [];
   answers.forEach(function(code,i){
     if(!code) return;
     var ans = Q[i].answers.find(function(a){ return a.code===code; });
     if(!ans) return;
-    pos.attack += ans.pos.attack;
-    pos.defense += ans.pos.defense;
-    pos.control += ans.pos.control;
-    pos.observe += ans.pos.observe;
+    var p = ans.pos || {attack:0,defense:0,control:0,observe:0};
+    pos.attack += p.attack||0;
+    pos.defense += p.defense||0;
+    pos.control += p.control||0;
+    pos.observe += p.observe||0;
     riskRaw += ans.risk||0;
     if(ans.riskType) riskTypes[ans.riskType] = (riskTypes[ans.riskType]||0) + (ans.risk||0);
+    if(ans.axis && typeof ans.axisScore==='number'){ axisScores[ans.axis] = (axisScores[ans.axis]||0) + ans.axisScore; }
+    if(ans.priorityTag) priorityTags.push('Q'+String(i+1).padStart(2,'0')+' — '+ans.priorityTag+' ('+ans.priorityScore+'점)');
+    if(ans.crossoverTag) crossoverTags.push('Q'+String(i+1).padStart(2,'0')+' — '+ans.crossoverTag+' ('+ans.crossoverScore+'점)');
   });
   var total = pos.attack+pos.defense+pos.control+pos.observe||1;
   var posPct = {
@@ -677,7 +758,7 @@ function calcScores() {
   if(posPct.control>=30) traits.push({text:'컨트롤형 — 팀 안정 가능성',accent:true});
   if(posPct.observe>=25) traits.push({text:'관찰형 — 분위기 파악형',accent:false});
   var ansAB = answers.filter(function(c){ return c==='A'||c==='B'; }).length;
-  if(ansAB>=7) traits.push({text:'전반적 적응력 높음',accent:true});
+  if(ansAB>=14) traits.push({text:'전반적 적응력 높음',accent:true});
   if(traits.length===0) traits.push({text:'유동형 — 추가 탐색 필요',accent:false});
   var checks = [];
   answers.forEach(function(code,i){
@@ -687,7 +768,68 @@ function calcScores() {
   });
   if(checks.length===0) checks.push('현재 단계에서 특별히 체크할 포인트 없음');
   var exploreTypes = Object.entries(riskTypes).filter(function(e){ return e[1]>=10; }).sort(function(a,b){ return b[1]-a[1]; }).map(function(e){ return e[0]; });
-  return {posPct:posPct, riskPct:riskPct, riskTypes:riskTypes, traits:traits, checks:checks, exploreTypes:exploreTypes};
+  return {posPct:posPct, riskPct:riskPct, riskTypes:riskTypes, traits:traits, checks:checks, exploreTypes:exploreTypes, axisScores:axisScores, priorityTags:priorityTags, crossoverTags:crossoverTags};
+}
+
+function axisLevel(axis, val) {
+  if(axis==='feedbackReceptivity') return val<=16?'low':val<=24?'mid':'high';
+  return val<=10?'low':val<=20?'mid':'high';
+}
+
+var AXIS_BASE_INSIGHT = {
+  chemistryBuilding: {
+    low: '낯선 사람과의 친밀감 형성에 시간이 걸리는 편으로 보입니다 — 팀 초반(1주차) 짝 배정이나 소그룹 활동을 권장합니다',
+    high: '낯선 사람과도 빠르게 어울리는 편이라, 팀 초반 라포 형성에 큰 어려움은 없을 것으로 보입니다'
+  },
+  recoverySpeed: {
+    low: '당황스러운 순간에서 회복까지 다소 시간이 걸리는 편으로 보입니다 — 실수 후 리듬을 되찾는 훈련이 도움이 될 수 있습니다',
+    high: '예상 못한 상황에서도 빠르게 리듬을 되찾는 편이라, 실전 대응력이 좋은 편으로 보입니다'
+  },
+  feedbackReceptivity: {
+    low: '지적이나 피드백을 받아들이는 데 다소 시간이 필요한 편으로 보입니다 — 코칭 시 직접적 지적보다는 스스로 인지하게 유도하는 방식을 권장합니다',
+    high: '피드백을 빠르게 흡수하고 실제로 반영하는 편이라, 코칭 효과가 빠르게 나타날 것으로 보입니다'
+  }
+};
+
+var POSITION_COMBO_INSIGHT = [
+  {pos:'attack', axis:'recoverySpeed', level:'low', text:'텐션을 주도하는 성향인 만큼, 실수했을 때 그 타격이 상대적으로 크게 느껴질 수 있습니다 — 리듬 회복 훈련을 함께 권장합니다'},
+  {pos:'attack', axis:'feedbackReceptivity', level:'low', text:'본인 스타일이 확고한 편이라, 지적을 사적인 공격처럼 받아들이지 않도록 표현 방식에 유의가 필요합니다'},
+  {pos:'defense', axis:'chemistryBuilding', level:'low', text:'리액션은 좋지만 관계 자체를 먼저 만들어가는 데는 시간이 걸리는 편으로 보입니다 — 케미가 맞는 상대와 먼저 엮어주는 배치를 고려해보세요'},
+  {pos:'defense', axis:'recoverySpeed', level:'low', text:'감정 표현이 풍부한 만큼, 상처도 오래 남을 수 있는 편으로 보입니다 — 민감한 순간 이후 개별 케어가 도움이 될 수 있습니다'},
+  {pos:'control', axis:'feedbackReceptivity', level:'low', text:'본인만의 진행 방식이 확고한 편이라, 새로운 방향을 제안할 때 근거를 함께 설명해주는 것이 효과적일 수 있습니다'},
+  {pos:'control', axis:'chemistryBuilding', level:'low', text:'역할 수행에 집중하는 성향이라, 관계 자체를 챙기는 데는 신경을 덜 쓸 수 있습니다 — 팀 케미도 함께 챙길 수 있도록 안내가 필요합니다'},
+  {pos:'observe', axis:'chemistryBuilding', level:'low', text:'조용히 지켜보는 성향이라, 먼저 다가가는 데는 다소 소극적일 수 있습니다 — 초반 짝 배정으로 자연스러운 기회를 만들어주는 게 좋습니다'},
+  {pos:'observe', axis:'feedbackReceptivity', level:'low', text:'내향적인 성향상 겉으로 티는 안 나도 속으로 담아둘 수 있습니다 — 지적 후 개별적으로 마음 상태를 확인해보는 것이 좋습니다'}
+];
+
+var POS_THRESHOLD = {attack:30, defense:30, control:30, observe:25};
+
+function generateCoachingInsights(sc) {
+  var axes = ['chemistryBuilding','recoverySpeed','feedbackReceptivity'];
+  var levels = {};
+  axes.forEach(function(a){ levels[a] = axisLevel(a, sc.axisScores[a]||0); });
+
+  var usedCombo = {};
+  var insights = [];
+
+  // 포지션 특화 조합 우선 적용 (일반 문장보다 더 구체적이므로 우선)
+  POSITION_COMBO_INSIGHT.forEach(function(combo){
+    if(levels[combo.axis]===combo.level && (sc.posPct[combo.pos]||0) >= POS_THRESHOLD[combo.pos]){
+      insights.push(combo.text);
+      usedCombo[combo.axis] = true;
+    }
+  });
+
+  // 조합으로 이미 다뤄지지 않은 축은 기본 문장으로 보완 (mid는 생략)
+  axes.forEach(function(a){
+    if(usedCombo[a]) return;
+    var lvl = levels[a];
+    if(lvl==='mid') return;
+    insights.push(AXIS_BASE_INSIGHT[a][lvl]);
+  });
+
+  if(insights.length===0) insights.push('현재 단계에서 특별히 강조할 코칭 포인트는 없습니다.');
+  return insights;
 }
 
 function saveToSheets() {
@@ -705,7 +847,13 @@ function saveToSheets() {
     job:applicantInfo.job||'',contact:applicantInfo.contact||'',
     q01:answers[0]||'',q02:answers[1]||'',q03:answers[2]||'',q04:answers[3]||'',q05:answers[4]||'',
     q06:answers[5]||'',q07:answers[6]||'',q08:answers[7]||'',q09:answers[8]||'',q10:answers[9]||'',
+    q11:answers[10]||'',q12:answers[11]||'',q13:answers[12]||'',q14:answers[13]||'',q15:answers[14]||'',
+    q16:answers[15]||'',q17:answers[16]||'',q18:answers[17]||'',q19:answers[18]||'',q20:answers[19]||'',
     attack:sc.posPct.attack,defense:sc.posPct.defense,control:sc.posPct.control,observe:sc.posPct.observe,risk:sc.riskPct,
+    reactionAuthenticity:sc.axisScores.reactionAuthenticity,supportIndex:sc.axisScores.supportIndex,
+    chemistryBuilding:sc.axisScores.chemistryBuilding,recoverySpeed:sc.axisScores.recoverySpeed,
+    feedbackReceptivity:sc.axisScores.feedbackReceptivity,
+    priorityTags:sc.priorityTags.join(' / '),crossoverTags:sc.crossoverTags.join(' / '),
     피해의식_Q1:getExploreLabel('피해의식',0),
     피해의식_Q2:getExploreLabel('피해의식',1),
     감정누적_Q1:getExploreLabel('감정누적',0),
@@ -769,7 +917,31 @@ function saveToSheets() {
 
 function el(tag,cls){ var e=document.createElement(tag); if(cls)e.className=cls; return e; }
 function div(parent){ parent.appendChild(el('div','divider')); }
-function addSectionTitle(parent,text){ var t=el('div','op-section-title'); t.textContent=text; parent.appendChild(t); }
+var helpIdCounter = 0;
+function addSectionTitle(parent,text,help){
+  var wrap = el('div','op-section-title-wrap');
+  var t = el('div','op-section-title');
+  t.textContent = text;
+  wrap.appendChild(t);
+  if(help){
+    helpIdCounter++;
+    var hid = 'help-'+helpIdCounter;
+    var btn = el('span','help-icon');
+    btn.textContent = 'ⓘ';
+    wrap.appendChild(btn);
+    var tip = el('div','help-tip');
+    tip.id = hid;
+    tip.textContent = help;
+    tip.style.display = 'none';
+    btn.addEventListener('click', function(){
+      tip.style.display = (tip.style.display==='none') ? 'block' : 'none';
+    });
+    parent.appendChild(wrap);
+    parent.appendChild(tip);
+    return;
+  }
+  parent.appendChild(wrap);
+}
 
 function renderOperator() {
   var inner = document.getElementById('op-inner');
@@ -802,7 +974,7 @@ function renderOperator() {
   div(inner);
 
   // position
-  addSectionTitle(inner,'포지션 가능성');
+  addSectionTitle(inner,'포지션 가능성','공격/수비/컨트롤/관찰 4개 유형 중 어디에 가까운지 보여주는 비율입니다. 공격형·수비형·컨트롤형은 30% 이상, 관찰형은 25% 이상일 때 뚜렷한 성향으로 봅니다. 그 미만이면 약한 신호이며, 여러 유형에 걸쳐 있는 게 정상입니다.');
   var posWrap = el('div','pos-bars op-section');
   [{key:'attack',label:'공격형',cls:'attack'},{key:'defense',label:'수비형',cls:'defense'},{key:'control',label:'컨트롤형',cls:'control'},{key:'observe',label:'관찰형',cls:'observe'}].forEach(function(p){
     var row = el('div','pos-row');
@@ -814,11 +986,12 @@ function renderOperator() {
   div(inner);
 
   // risk
-  addSectionTitle(inner,'리스크 지수');
+  addSectionTitle(inner,'리스크 지수','이탈이나 팀 내 불화 가능성을 나타내는 지표입니다. 30% 미만은 안전, 30~60%는 일부 확인 권장, 60% 이상은 아래 탐색 질문을 꼭 확인하세요.');
   var riskSec = el('div','op-section');
-  var rColor = sc.riskPct<30?'risk-low-color':sc.riskPct<60?'risk-mid-color':'risk-high-color';
-  var rBarColor = sc.riskPct<30?'#6a9f7a':sc.riskPct<60?'#c4a25a':'#c47a7a';
-  var rDesc = sc.riskPct<30?'추가 탐색 질문 없음 — 자연스럽게 대화 진행':sc.riskPct<60?'일부 탐색 질문 확인 권장':'아래 탐색 질문 전체 확인 필요';
+  var hasChecks = sc.checks.length>0 && sc.checks[0]!=='현재 단계에서 특별히 체크할 포인트 없음';
+  var rColor = !hasChecks?'risk-low-color':sc.riskPct<60?'risk-mid-color':'risk-high-color';
+  var rBarColor = !hasChecks?'#6a9f7a':sc.riskPct<60?'#c4a25a':'#c47a7a';
+  var rDesc = !hasChecks?'추가 탐색 질문 없음 — 자연스럽게 대화 진행':sc.riskPct<60?'일부 탐색 질문 확인 권장':'아래 탐색 질문 전체 확인 필요';
   var rWrap = el('div','risk-wrap');
   rWrap.innerHTML = '<div class="risk-top"><span class="risk-label">리스크 지수</span><span class="risk-pct-text '+rColor+'">'+sc.riskPct+'%</span></div><div class="risk-bar-wrap"><div class="risk-bar-fill" style="width:'+sc.riskPct+'%;background:'+rBarColor+'"></div></div><div class="risk-desc">'+rDesc+'</div>';
   riskSec.appendChild(rWrap);
@@ -826,7 +999,7 @@ function renderOperator() {
   div(inner);
 
   // traits
-  addSectionTitle(inner,'관계 · 방송 성향');
+  addSectionTitle(inner,'관계 · 방송 성향','포지션%을 바탕으로 자동 분류된 종합 태그입니다. 공격·수비·컨트롤형은 30% 이상, 관찰형은 25% 이상일 때 표시되며, A·B 응답이 14개 이상이면 "전반적 적응력 높음" 태그가 추가됩니다. 아무 태그도 없으면 "유동형"으로 표시됩니다.');
   var traitSec = el('div','op-section');
   var traitWrap = el('div','trait-tags');
   sc.traits.forEach(function(t){
@@ -838,8 +1011,28 @@ function renderOperator() {
   inner.appendChild(traitSec);
   div(inner);
 
+  // priority / crossover (Q11~14)
+  if(sc.priorityTags.length || sc.crossoverTags.length){
+    addSectionTitle(inner,'포지션 우선순위 (Q11~14)','같은 포지션이라도 그 안에서 더 뛰어난 사람을 가려내는 점수입니다. "확정" 태그는 15점 만점 기준 해당 포지션의 강한 신호이고, "겸업" 태그는 8점 만점 기준 다른 포지션 대체 가능성을 뜻합니다. 같은 포지션 지원자가 여러 명일 때 점수가 높은 사람을 우선 배치 후보로 고려하세요.');
+    var prioSec = el('div','op-section');
+    var prioWrap = el('div','trait-tags');
+    sc.priorityTags.forEach(function(t){
+      var tag = el('span','trait-tag accent');
+      tag.textContent = t;
+      prioWrap.appendChild(tag);
+    });
+    sc.crossoverTags.forEach(function(t){
+      var tag = el('span','trait-tag');
+      tag.textContent = t;
+      prioWrap.appendChild(tag);
+    });
+    prioSec.appendChild(prioWrap);
+    inner.appendChild(prioSec);
+    div(inner);
+  }
+
   // checks
-  addSectionTitle(inner,'⚠ 체크 포인트');
+  addSectionTitle(inner,'⚠ 체크 포인트','리스크 점수가 1점이라도 있는 답변만 모아둔 목록입니다. 피해의식·감정누적·과해석·악플민감·단절형·인정욕구, 6개 유형 중 해당되는 항목이 여기 뜨며, 아래 "추가 탐색 질문"에서 같은 카테고리를 찾아 확인해보세요.');
   var checkSec = el('div','op-section');
   var checkList = el('div','check-list');
   sc.checks.forEach(function(c){
@@ -849,14 +1042,52 @@ function renderOperator() {
   });
   checkSec.appendChild(checkList);
   inner.appendChild(checkSec);
+  div(inner);
+
+  // axis scores (Q15~20) — feedbackReceptivity 강조 배치
+  addSectionTitle(inner,'역량 진단 (Q15~20)','케미 형성력·즉석 회복력·피드백 수용력, 4주 모의방송 코칭 설계용 점수입니다(각 0~30점). 케미 형성력·즉석 회복력은 0~10점 낮음, 11~20점 보통, 21~30점 높음이며, 피드백 수용력은 기준이 더 엄격해서 0~16점 낮음(빨강), 17~24점 보통(주황), 25~30점 높음(초록)입니다.');
+  var axisSec = el('div','op-section');
+  var axisWrap = el('div','pos-bars');
+  var fb = sc.axisScores.feedbackReceptivity||0;
+  var fbLevel = fb<=16 ? 'low' : fb<=24 ? 'mid' : 'high';
+  var fbColor = fbLevel==='low' ? '#c47a7a' : fbLevel==='mid' ? '#c4a25a' : '#6a9f7a';
+  var fbRow = el('div','pos-row');
+  fbRow.innerHTML = '<span class="pos-label" style="width:110px;font-weight:600;color:'+fbColor+'">⚠ 피드백 수용력</span><div class="pos-bar-wrap"><div class="pos-bar-fill" style="width:'+Math.round(fb/30*100)+'%;background:'+fbColor+'"></div></div><span class="pos-pct" style="font-size:16px;font-weight:700;color:'+fbColor+'">'+fb+'/30</span>';
+  axisWrap.appendChild(fbRow);
+  [
+    {key:'chemistryBuilding',label:'케미 형성력'},
+    {key:'recoverySpeed',label:'즉석 회복력'}
+  ].forEach(function(a){
+    var v = sc.axisScores[a.key]||0;
+    var row = el('div','pos-row');
+    row.innerHTML = '<span class="pos-label" style="width:110px">'+a.label+'</span><div class="pos-bar-wrap"><div class="pos-bar-fill" style="width:'+Math.round(v/30*100)+'%;background:#7a92a5"></div></div><span class="pos-pct">'+v+'/30</span>';
+    axisWrap.appendChild(row);
+  });
+  axisSec.appendChild(axisWrap);
+  inner.appendChild(axisSec);
+
+  // 자동 코칭 인사이트
+  var insights = generateCoachingInsights(sc);
+  addSectionTitle(inner,'💬 자동 코칭 인사이트','역량 점수가 "낮음" 구간일 때만 자동으로 생성되는 코칭 제안입니다("보통" 구간은 특별히 언급할 필요가 없어 생략됩니다). 포지션과 결합해 더 구체적으로 나올 때도 있습니다. 참고용이며, 실제 코칭 방향은 직접 판단해주세요.');
+  var insightSec = el('div','op-section');
+  var insightList = el('div','check-list');
+  insights.forEach(function(txt){
+    var item = el('div','check-item');
+    item.style.borderLeftColor = 'rgba(122,146,165,0.7)';
+    item.textContent = txt;
+    insightList.appendChild(item);
+  });
+  insightSec.appendChild(insightList);
+  inner.appendChild(insightSec);
 
   // explore — 모든 유형 항상 표시, 카테고리별 묶음, 토글 선택
   div(inner);
-  addSectionTitle(inner,'추가 탐색 질문');
+  addSectionTitle(inner,'추가 탐색 질문','리스크 점수가 높은 카테고리부터 자동 정렬되어 있습니다. 카테고리 점수 0점은 해당 없음(초록), 1~19점은 확인 권장(주황), 20점 이상은 적극 탐색 필요(빨강)로 표시되니, 맨 위부터 순서대로 대화를 이어가시면 됩니다.');
   var exploreSec = el('div','op-section');
   var exploreWrap = el('div','risk-explore');
 
   var allTypes = ['피해의식','감정누적','과해석','악플민감','단절형','인정욕구'];
+  allTypes.sort(function(a,b){ return (sc.riskTypes[b]||0) - (sc.riskTypes[a]||0); });
   allTypes.forEach(function(type){
     var data = EXPLORE[type];
     if(!data) return;
@@ -868,8 +1099,8 @@ function renderOperator() {
     var catHeader = el('div','explore-category-header');
     var catTitle = el('div','explore-category-title');
     catTitle.textContent = data.title;
-    var catBadge = el('div','explore-category-score '+(catScore>=20?'verdict-bad':catScore>=10?'verdict-mid':'verdict-ok'));
-    catBadge.textContent = catScore > 0 ? '탐색 필요' : '해당 없음';
+    var catBadge = el('div','explore-category-score '+(catScore>=20?'verdict-bad':catScore>=10?'verdict-mid':catScore>0?'verdict-mid':'verdict-ok'));
+    catBadge.textContent = catScore > 0 ? '⚠ 탐색 필요' : '✓ 해당 없음';
     catHeader.appendChild(catTitle);
     catHeader.appendChild(catBadge);
     category.appendChild(catHeader);
@@ -925,7 +1156,7 @@ function renderOperator() {
   div(inner);
 
   // detail
-  addSectionTitle(inner,'질문별 선택 상세');
+  addSectionTitle(inner,'질문별 선택 상세','신청자가 각 질문에서 정확히 어떤 답변을 골랐는지 원문 그대로 확인할 수 있는 섹션입니다.');
   var detailSec = el('div','op-section');
   var detailList = el('div','q-detail-list');
   Q.forEach(function(q,i){
@@ -933,7 +1164,7 @@ function renderOperator() {
     var ans = q.answers.find(function(a){ return a.code===code; });
     var item = el('div','q-detail-item');
     var selClass = code==='E'?'code-e':code==='D'?'code-d':code==='C'?'code-c':code==='B'?'code-b':'code-a';
-    item.innerHTML = '<div class="q-detail-top"><span class="q-detail-num">Q'+String(i+1).padStart(2,'0')+'</span><span class="q-detail-sel '+selClass+'">'+(code||'?')+'</span></div><div class="q-detail-text">'+(ans?ans.text:'미응답')+'</div><div class="q-detail-intent">'+(ans?ans.trait:'')+'</div>';
+    item.innerHTML = '<div class="q-detail-top"><span class="q-detail-num">Q'+String(i+1).padStart(2,'0')+'</span><span class="q-detail-sel '+selClass+'">'+(code||'?')+'</span></div><div class="q-detail-question">'+q.text+'</div><div class="q-detail-text">'+(ans?ans.text:'미응답')+'</div><div class="q-detail-intent">'+(ans&&ans.trait?ans.trait:'')+'</div>';
     detailList.appendChild(item);
   });
   detailSec.appendChild(detailList);
