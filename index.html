@@ -968,8 +968,8 @@ function calcScores() {
   var traits = [];
   if(posPct.attack>=30) traits.push({text:'공격형 — 분위기 리드 가능성',accent:true});
   if(posPct.defense>=30) traits.push({text:'수비형 — 리액션 케미 가능성',accent:true});
-  if(posPct.control>=30) traits.push({text:'조율형 — 팀 안정 가능성',accent:true});
   if(posPct.observe>=30) traits.push({text:'수습형 — 위기 해결 가능성',accent:true});
+  if(posPct.control>=30) traits.push({text:'조율형 — 팀 안정 가능성',accent:true});
   var ansAB = answers.filter(function(c){ return c==='A'||c==='B'; }).length;
   if(ansAB>=14) traits.push({text:'전반적 적응력 높음',accent:true});
   if(traits.length===0) traits.push({text:'유동형 — 추가 탐색 필요',accent:false});
@@ -1191,7 +1191,7 @@ function renderOperator() {
   // position A — 상대적 유형 분석
   addSectionTitle(inner,'포지션 가능성A — 상대적 유형 분석','공격/수비/조율/수습 4개 유형 중 어디에 상대적으로 더 치우쳤는지 보여주는 비율입니다(4개 합=100%). 4개 유형 모두 30% 이상일 때 뚜렷한 성향으로 봅니다. 이 사람 안에서의 "상대적 비중"이라, 다른 사람과 절대적 강도를 비교하려면 아래 B표를 함께 참고하세요.');
   var posWrap = el('div','pos-bars op-section');
-  [{key:'attack',label:'공격형',cls:'attack'},{key:'defense',label:'수비형',cls:'defense'},{key:'control',label:'조율형',cls:'control'},{key:'observe',label:'수습형',cls:'observe'}].forEach(function(p){
+  [{key:'attack',label:'공격형',cls:'attack'},{key:'defense',label:'수비형',cls:'defense'},{key:'observe',label:'수습형',cls:'observe'},{key:'control',label:'조율형',cls:'control'}].forEach(function(p){
     var row = el('div','pos-row');
     var pct = sc.posPct[p.key];
     row.innerHTML = '<span class="pos-label">'+p.label+'</span><div class="pos-bar-wrap"><div class="pos-bar-fill '+p.cls+'" style="width:'+pct+'%"></div></div><span class="pos-pct">'+pct+'%</span>';
@@ -1203,7 +1203,7 @@ function renderOperator() {
   // position B — 강한 유형 우선
   addSectionTitle(inner,'포지션 가능성B — 강한 유형 우선','각 유형별로 받을 수 있는 고정 만점을 기준으로, 이 사람이 그 유형에서 절대적으로 얼마나 강한 신호를 보였는지 나타냅니다(4개 합이 100%가 아님, 유형별로 독립 계산). A표와 함께 보면, "다재다능해서 골고루 강한 사람"과 "어디서도 특별한 신호가 없어 고르게 나온 사람"을 구분할 수 있습니다.');
   var posAbsWrap = el('div','pos-bars op-section');
-  [{key:'attack',label:'공격형',cls:'attack'},{key:'defense',label:'수비형',cls:'defense'},{key:'control',label:'조율형',cls:'control'},{key:'observe',label:'수습형',cls:'observe'}].forEach(function(p){
+  [{key:'attack',label:'공격형',cls:'attack'},{key:'defense',label:'수비형',cls:'defense'},{key:'observe',label:'수습형',cls:'observe'},{key:'control',label:'조율형',cls:'control'}].forEach(function(p){
     var row = el('div','pos-row');
     var pct = sc.posAbsPct[p.key];
     row.innerHTML = '<span class="pos-label">'+p.label+'</span><div class="pos-bar-wrap"><div class="pos-bar-fill '+p.cls+'" style="width:'+pct+'%"></div></div><span class="pos-pct">'+pct+'%</span>';
